@@ -102,27 +102,24 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
                 {
                     skeletonFrame.CopySkeletonDataTo(this.skeletonData);
                     received = true;
-                    //=================================
-                    if (skeletonData[0].Joints[JointType.Head].Position.X == 0 && skeletonData[0].Joints[JointType.Head].Position.Y == 0 && skeletonData[0].Joints[JointType.Head].Position.Z == 0) ;
-                    else
-                    {
-                        
-                        sw.Write(" 头部 x " + skeletonData[0].Joints[JointType.Head].Position.X.ToString());
-                        sw.Write(" y " + skeletonData[0].Joints[JointType.Head].Position.Y.ToString());
-                        sw.Write(" z " + skeletonData[0].Joints[JointType.Head].Position.Z.ToString());
-                        sw.Write(" 左手  x " + skeletonData[0].Joints[JointType.HandLeft].Position.X.ToString());
-                        sw.Write(" y " + skeletonData[0].Joints[JointType.HandLeft].Position.Y.ToString());
-                        sw.WriteLine(" z " + skeletonData[0].Joints[JointType.HandLeft].Position.Z.ToString());
-                        sw.Flush();
-                        for(int i = 0; i < 6; i++)
-                        {
-                            if (skeletonData[i].Joints[JointType.HandLeft].Position.Z != 0)
-                            {
-                                Console.Write(i);
-                                break;
-                            }
-                        }
-                    }
+                    ////=================================
+                    
+                    //    sw.Write(" 头部 x " + skeletonData[0].Joints[JointType.Head].Position.X.ToString());
+                    //    sw.Write(" y " + skeletonData[0].Joints[JointType.Head].Position.Y.ToString());
+                    //    sw.Write(" z " + skeletonData[0].Joints[JointType.Head].Position.Z.ToString());
+                    //    sw.Write(" 左手  x " + skeletonData[0].Joints[JointType.HandLeft].Position.X.ToString());
+                    //    sw.Write(" y " + skeletonData[0].Joints[JointType.HandLeft].Position.Y.ToString());
+                    //    sw.WriteLine(" z " + skeletonData[0].Joints[JointType.HandLeft].Position.Z.ToString());
+                    //    sw.Flush();
+                    //    for(int i = 0; i < 6; i++)
+                    //    {
+                    //        if (skeletonData[i].Joints[JointType.HandLeft].Position.Z != 0)
+                    //        {
+                    //            Console.Write(i);
+                    //            break;
+                    //        }
+                    //    }
+                    
                     //=================================
                 }
             }
@@ -241,39 +238,74 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
 
         private void DatabaseOp_Click(object sender, EventArgs e)
         {
-            Console.Write(" 头部 x " + skeletonData[0].Joints[JointType.Head].Position.X);
-            Console.Write(" y " + skeletonData[0].Joints[JointType.Head].Position.Y);
-            Console.WriteLine(" z " + skeletonData[0].Joints[JointType.Head].Position.Z);
-            Console.Write(" 左手 x " + skeletonData[0].Joints[JointType.HandLeft].Position.X);
-            Console.Write(" y " + skeletonData[0].Joints[JointType.HandLeft].Position.Y);
-            Console.WriteLine(" z " + skeletonData[0].Joints[JointType.HandLeft].Position.Z);
-            Console.Write(" 脊柱 x " + skeletonData[0].Joints[JointType.Spine].Position.X);
-            Console.Write(" y " + skeletonData[0].Joints[JointType.Spine].Position.Y);
-            Console.WriteLine(" z " + skeletonData[0].Joints[JointType.Spine].Position.Z);
 
-            //using (SqlConnection conn = new SqlConnection(connsql))
-            //{
-            //    conn.Open();//打开数据库
+            foreach (Skeleton skeleton in this.skeletonData)
+            {
+                if (skeleton == null) continue;
+                if (skeleton.TrackingState == SkeletonTrackingState.Tracked&&textBox1.Text!=null)
+                {
+                    Console.Write(" 头部 x " + skeleton.Joints[JointType.Head].Position.X);
+                    Console.Write(" y " + skeleton.Joints[JointType.Head].Position.Y);
+                    Console.WriteLine(" z " + skeleton.Joints[JointType.Head].Position.Z);
+                    Console.Write(" 左手 x " + skeleton.Joints[JointType.HandLeft].Position.X);
+                    Console.Write(" y " + skeleton.Joints[JointType.HandLeft].Position.Y);
+                    Console.WriteLine(" z " + skeleton.Joints[JointType.HandLeft].Position.Z);
+                    Console.Write(" 脊柱 x " + skeleton.Joints[JointType.Spine].Position.X);
+                    Console.Write(" y " + skeleton.Joints[JointType.Spine].Position.Y);
+                    Console.WriteLine(" z " + skeleton.Joints[JointType.Spine].Position.Z);
+                    Console.WriteLine();
+                    using (SqlConnection conn = new SqlConnection(connsql))
+                    {
+                        conn.Open();//打开数据库
 
-            //    SqlCommand cmd = conn.CreateCommand();
-            //    //创建查询语句
-            //    cmd.CommandText = "SELECT * FROM pos1";
-            //    //从数据库中读取数据流存入reader中
-            //    SqlDataReader reader = cmd.ExecuteReader();
-            //    Console.WriteLine(conn.State);
-            //    while (reader.Read())
-            //    {
-            //        string name = reader.GetString(reader.GetOrdinal("x1"));
-            //        //int age = reader.GetInt32(reader.GetOrdinal("age"));
-            //        Console.WriteLine(name);
-            //    }
+                        SqlCommand cmd = conn.CreateCommand();
+                        //创建查询语句
+                        //cmd.CommandText = "SELECT * FROM pos1";
+                        ////从数据库中读取数据流存入reader中
+                        //SqlDataReader reader = cmd.ExecuteReader();
+                        //Console.WriteLine(conn.State);
+                        //while (reader.Read())
+                        //{
+                        //    string name = reader.GetString(reader.GetOrdinal("x1"));
+                        //    //int age = reader.GetInt32(reader.GetOrdinal("age"));
+                        //    Console.WriteLine(name);
+                        //}
 
-            //    reader.Close();//报bug，必须要关掉才可以执行。
-            //    String insert = "insert into pos1 values(5,3,6)";
-            //    cmd.CommandText = insert;
-            //    cmd.ExecuteNonQuery();
+                        //reader.Close();//报bug，必须要关掉才可以执行。
+                        String insert = "insert into positions values("+ skeleton.Joints[JointType.Head].Position.X+ ","+ skeleton.Joints[JointType.Head].Position.Y + ","+ skeleton.Joints[JointType.Head].Position.Z+ "," + textBox1.Text + ",'Head')";
+                        String insert1 = " insert into positions values(" + skeleton.Joints[JointType.HandLeft].Position.X + "," + skeleton.Joints[JointType.HandLeft].Position.Y + "," + skeleton.Joints[JointType.HandLeft].Position.Z + ","+textBox1.Text+",'HandLeft')";
+                        String insert2 = " insert into positions values(" + skeleton.Joints[JointType.WristLeft].Position.X + "," + skeleton.Joints[JointType.WristLeft].Position.Y + "," + skeleton.Joints[JointType.WristLeft].Position.Z + "," + textBox1.Text + ",'WristLeft')";
+                        String insert3 = " insert into positions values(" + skeleton.Joints[JointType.ElbowLeft].Position.X + "," + skeleton.Joints[JointType.ElbowLeft].Position.Y + "," + skeleton.Joints[JointType.ElbowLeft].Position.Z + "," + textBox1.Text + ",'ElbowLeft')";
+                        String insert4 = " insert into positions values(" + skeleton.Joints[JointType.ShoulderLeft].Position.X + "," + skeleton.Joints[JointType.ShoulderLeft].Position.Y + "," + skeleton.Joints[JointType.ShoulderLeft].Position.Z + "," + textBox1.Text + ",'ShoulderLeft')";
+                        String insert5 = " insert into positions values(" + skeleton.Joints[JointType.ShoulderCenter].Position.X + "," + skeleton.Joints[JointType.ShoulderCenter].Position.Y + "," + skeleton.Joints[JointType.ShoulderCenter].Position.Z + "," + textBox1.Text + ",'ShoulderCenter')";
+                        String insert6 = " insert into positions values(" + skeleton.Joints[JointType.ShoulderRight].Position.X + "," + skeleton.Joints[JointType.ShoulderRight].Position.Y + "," + skeleton.Joints[JointType.ShoulderRight].Position.Z + "," + textBox1.Text + ",'ShoulderRight')";
+                        String insert7 = " insert into positions values(" + skeleton.Joints[JointType.ElbowRight].Position.X + "," + skeleton.Joints[JointType.ElbowRight].Position.Y + "," + skeleton.Joints[JointType.ElbowRight].Position.Z + "," + textBox1.Text + ",'ElbowRight')";
+                        String insert8 = " insert into positions values(" + skeleton.Joints[JointType.WristRight].Position.X + "," + skeleton.Joints[JointType.WristRight].Position.Y + "," + skeleton.Joints[JointType.WristRight].Position.Z + "," + textBox1.Text + ",'WristRight')";
+                        String insert9 = " insert into positions values(" + skeleton.Joints[JointType.HandRight].Position.X + "," + skeleton.Joints[JointType.HandRight].Position.Y + "," + skeleton.Joints[JointType.HandRight].Position.Z + "," + textBox1.Text + ",'HandRight')";
+                        String insert10 = " insert into positions values(" + skeleton.Joints[JointType.FootLeft].Position.X + "," + skeleton.Joints[JointType.FootLeft].Position.Y + "," + skeleton.Joints[JointType.FootLeft].Position.Z + "," + textBox1.Text + ",'FootLeft')";
+                        String insert11 = " insert into positions values(" + skeleton.Joints[JointType.AnkleLeft].Position.X + "," + skeleton.Joints[JointType.AnkleLeft].Position.Y + "," + skeleton.Joints[JointType.AnkleLeft].Position.Z + "," + textBox1.Text + ",'AnkleLeft')";
+                        String insert12 = " insert into positions values(" + skeleton.Joints[JointType.KneeLeft].Position.X + "," + skeleton.Joints[JointType.KneeLeft].Position.Y + "," + skeleton.Joints[JointType.KneeLeft].Position.Z + "," + textBox1.Text + ",'KneeLeft')";
+                        String insert13 = " insert into positions values(" + skeleton.Joints[JointType.HipLeft].Position.X + "," + skeleton.Joints[JointType.HipLeft].Position.Y + "," + skeleton.Joints[JointType.HipLeft].Position.Z + "," + textBox1.Text + ",'HipLeft')";
+                        String insert14 = " insert into positions values(" + skeleton.Joints[JointType.HipCenter].Position.X + "," + skeleton.Joints[JointType.HipCenter].Position.Y + "," + skeleton.Joints[JointType.HipCenter].Position.Z + "," + textBox1.Text + ",'HipCenter')";
+                        String insert15 = " insert into positions values(" + skeleton.Joints[JointType.Spine].Position.X + "," + skeleton.Joints[JointType.Spine].Position.Y + "," + skeleton.Joints[JointType.Spine].Position.Z + "," + textBox1.Text + ",'Spine')";
+                        String insert16 = " insert into positions values(" + skeleton.Joints[JointType.HipRight].Position.X + "," + skeleton.Joints[JointType.HipRight].Position.Y + "," + skeleton.Joints[JointType.HipRight].Position.Z + "," + textBox1.Text + ",'HipRight')";
+                        String insert17 = " insert into positions values(" + skeleton.Joints[JointType.KneeRight].Position.X + "," + skeleton.Joints[JointType.KneeRight].Position.Y + "," + skeleton.Joints[JointType.KneeRight].Position.Z + "," + textBox1.Text + ",'KneeRight')";
+                        String insert18 = " insert into positions values(" + skeleton.Joints[JointType.AnkleRight].Position.X + "," + skeleton.Joints[JointType.AnkleRight].Position.Y + "," + skeleton.Joints[JointType.AnkleRight].Position.Z + "," + textBox1.Text + ",'AnkleRight')";
+                        String insert19 = " insert into positions values(" + skeleton.Joints[JointType.FootRight].Position.X + "," + skeleton.Joints[JointType.FootRight].Position.Y + "," + skeleton.Joints[JointType.FootRight].Position.Z + "," + textBox1.Text + ",'FootRight')";
+                        String All = insert + insert1 + insert2 + insert3 + insert4 + insert5 + insert6 + insert7 + insert8 + insert9 + 
+                            insert10 + insert11 + insert12 + insert13 + insert14 + insert15 + insert16 + insert17 + insert18 + insert19;
+                        cmd.CommandText = All;
+                        cmd.ExecuteNonQuery();
 
-            //}
+                    }
+                }
+            }
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void PictureBox1_Click(object sender, EventArgs e)
