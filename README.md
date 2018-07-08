@@ -1,5 +1,5 @@
 # Kinect
-_Kinect for detect chinese kongfu.._
+_Kinect for detecting posture of chinese kongfu..._
 
 ## 项目进度 
 ___ 
