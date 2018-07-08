@@ -5,6 +5,7 @@ _Kinect for detecting posture of chinese kongfu..._
 ___ 
 - [ ] 
 1.太极姿势集合。  见pic.jpg ,最好会做。
+
 - [ ] 
 2.svm支持向量机。 
 - [x] 
