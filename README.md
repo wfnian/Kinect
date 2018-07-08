@@ -8,7 +8,14 @@ ___
 1.太极姿势集合。  见pic.jpg ,最好会做。![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon)
 
 - [ ] 
+<<<<<<< HEAD
 2.svm支持向量机。 ![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon)
+=======
+1.太极姿势集合。  见pic.jpg ,最好会做。
+
+- [ ] 
+2.svm支持向量机。 
+>>>>>>> c59d33c366a7018b503af88f13a88f2e1cc279c1
 - [x] 
 3.数据库入库。![Build Status](https://camo.githubusercontent.com/7ff1a64ca6e9f85bcdfc81a2e11bff01b9ad3d33/68747470733a2f2f7472617669732d63692e6f72672f70696b65736c65792f6769746875626261646765732e737667) ![node](https://img.shields.io/badge/%E7%8E%8B%E6%96%B9%E5%B9%B4-adding-green.svg)
 - [ ] 
