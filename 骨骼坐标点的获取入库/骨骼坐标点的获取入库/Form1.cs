@@ -22,14 +22,13 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
 
     public partial class Form1 : Form
     {
+        FileStream fs = new FileStream("f:\\2.txt", FileMode.Create);
+        StreamWriter sw;
         private const string V = "F:\\kinect\\12.jpg";
         private String connsql = "server=.;database=bone_pos;integrated security=SSPI";
         private Image<Bgr, Byte> skeletonImage;
         int depthWidth, depthHeight;
-        int colorWidth, colorHeight;
 
-        private Image<Bgr, Byte> colorImage;
-        private Image<Bgr, Byte> depthImage;
         private Skeleton[] skeletonData;//按理说是识别六人，size = 6
         private MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_COMPLEX, 0.3, 0.3);
         //数据缓冲存储空间
@@ -54,7 +53,8 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
                 }
             }//连接设备;
             if (null != this.sensor)
-            {   //初始化Kinect设置            
+            {   //初始化Kinect设置     
+                sw = new StreamWriter(this.fs);
                 colorImageFormat = ColorImageFormat.RgbResolution640x480Fps30;
                 depthImageFormat = DepthImageFormat.Resolution640x480Fps30;
                 this.sensor.SkeletonStream.Enable();//设备骨骼可用;
@@ -87,11 +87,11 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
 
         private void SensorSkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
         {
-            //Skeleton[] skeletons = new Skeleton[0];
+            //Skeleton[] skeletonData = new Skeleton[0];
             //using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
             //{
-            //    skeletons = new Skeleton[skeletonFrame.SkeletonArrayLength];
-            //    skeletonFrame.CopySkeletonDataTo(skeletons);
+            //    skeletonData = new Skeleton[skeletonFrame.SkeletonArrayLength];
+            //    skeletonFrame.CopySkeletonDataTo(skeletonData);
 
             //}
             bool received = false;
@@ -102,13 +102,33 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
                 {
                     skeletonFrame.CopySkeletonDataTo(this.skeletonData);
                     received = true;
+                    //=================================
+                    if (skeletonData[0].Joints[JointType.Head].Position.X == 0 && skeletonData[0].Joints[JointType.Head].Position.Y == 0 && skeletonData[0].Joints[JointType.Head].Position.Z == 0) ;
+                    else
+                    {
+                        
+                        sw.Write(" 头部 x " + skeletonData[0].Joints[JointType.Head].Position.X.ToString());
+                        sw.Write(" y " + skeletonData[0].Joints[JointType.Head].Position.Y.ToString());
+                        sw.Write(" z " + skeletonData[0].Joints[JointType.Head].Position.Z.ToString());
+                        sw.Write(" 左手  x " + skeletonData[0].Joints[JointType.HandLeft].Position.X.ToString());
+                        sw.Write(" y " + skeletonData[0].Joints[JointType.HandLeft].Position.Y.ToString());
+                        sw.WriteLine(" z " + skeletonData[0].Joints[JointType.HandLeft].Position.Z.ToString());
+                        sw.Flush();
+                        for(int i = 0; i < 6; i++)
+                        {
+                            if (skeletonData[i].Joints[JointType.HandLeft].Position.Z != 0)
+                            {
+                                Console.Write(i);
+                                break;
+                            }
+                        }
+                    }
+                    //=================================
                 }
             }
 
             if (received)
             {
-
-
                 //重绘整个画面，冲掉原有骨骼图像
                 skeletonImage.Draw(new Rectangle(0, 0, skeletonImage.Width, skeletonImage.Height), new Bgr(0.0, 0.0, 0.0), -1);
 
@@ -218,33 +238,45 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
             DepthImagePoint depthPoint = this.sensor.CoordinateMapper.MapSkeletonPointToDepthPoint(skelpoint, depthImageFormat);
             return new System.Drawing.Point(depthPoint.X, depthPoint.Y);
         }
+
         private void DatabaseOp_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connsql))
-            {
-                conn.Open();//打开数据库
+            Console.Write(" 头部 x " + skeletonData[0].Joints[JointType.Head].Position.X);
+            Console.Write(" y " + skeletonData[0].Joints[JointType.Head].Position.Y);
+            Console.WriteLine(" z " + skeletonData[0].Joints[JointType.Head].Position.Z);
+            Console.Write(" 左手 x " + skeletonData[0].Joints[JointType.HandLeft].Position.X);
+            Console.Write(" y " + skeletonData[0].Joints[JointType.HandLeft].Position.Y);
+            Console.WriteLine(" z " + skeletonData[0].Joints[JointType.HandLeft].Position.Z);
+            Console.Write(" 脊柱 x " + skeletonData[0].Joints[JointType.Spine].Position.X);
+            Console.Write(" y " + skeletonData[0].Joints[JointType.Spine].Position.Y);
+            Console.WriteLine(" z " + skeletonData[0].Joints[JointType.Spine].Position.Z);
 
-                SqlCommand cmd = conn.CreateCommand();
-                //创建查询语句
-                cmd.CommandText = "SELECT * FROM pos1";
-                //从数据库中读取数据流存入reader中
-                SqlDataReader reader = cmd.ExecuteReader();
-                Console.WriteLine(conn.State);
-                while (reader.Read())
-                {
-                    string name = reader.GetString(reader.GetOrdinal("x1"));
-                    //int age = reader.GetInt32(reader.GetOrdinal("age"));
-                    Console.WriteLine(name);
-                }
-                reader.Close();//报bug，必须要关掉才可以执行。
-                String insert = "insert into pos1 values(5,3,6)";
-                cmd.CommandText = insert;
-                cmd.ExecuteNonQuery();
+            //using (SqlConnection conn = new SqlConnection(connsql))
+            //{
+            //    conn.Open();//打开数据库
 
-            }
+            //    SqlCommand cmd = conn.CreateCommand();
+            //    //创建查询语句
+            //    cmd.CommandText = "SELECT * FROM pos1";
+            //    //从数据库中读取数据流存入reader中
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    Console.WriteLine(conn.State);
+            //    while (reader.Read())
+            //    {
+            //        string name = reader.GetString(reader.GetOrdinal("x1"));
+            //        //int age = reader.GetInt32(reader.GetOrdinal("age"));
+            //        Console.WriteLine(name);
+            //    }
+
+            //    reader.Close();//报bug，必须要关掉才可以执行。
+            //    String insert = "insert into pos1 values(5,3,6)";
+            //    cmd.CommandText = insert;
+            //    cmd.ExecuteNonQuery();
+
+            //}
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void PictureBox1_Click(object sender, EventArgs e)
         {
 
         }
