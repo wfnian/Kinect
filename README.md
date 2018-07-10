@@ -1,7 +1,7 @@
 # Kinect
 _Kinect for detecting posture of chinese kongfu..._
 
-[TOC]
+![url](https://qr.api.cli.im/qr?data=https%253A%252F%252Fgithub.com%252Fwfnian%252FKinect&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=http%3A&size=136&kid=cliim&key=6fc6080d5e7a26cb74bf361066319a3c)
 
 ## 项目进度 ![Build Status](https://img.shields.io/badge/%E8%BF%9B%E5%BA%A6-Stagnation-lightgrey.svg)
 ___ 
@@ -11,7 +11,7 @@ ___
 1.太极姿势集合。  见pic.jpg ,最好会做。![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon) ![Status](https://img.shields.io/badge/finished-%E9%99%88%E8%BF%9C%E5%86%9B%2C%E4%BD%95%E5%BD%A6%E4%BD%B6-blue.svg)
 
 - [ ] 
-2.如何分类？ $1.$ svm支持向量机。 $2.$普通分类？可以算两个节点之间的距离（二范数、曼哈顿距离）
+2.如何分类？ ①.svm支持向量机。 ②.普通分类？可以算两个节点之间的距离（二范数、曼哈顿距离）
 ![Wercker](https://img.shields.io/wercker/ci/wercker/docs.svg)
 
 - [x] 
