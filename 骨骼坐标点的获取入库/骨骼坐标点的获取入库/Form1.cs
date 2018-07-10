@@ -44,6 +44,7 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
         private void Form1_Load(object sender, EventArgs e)
         {
             pictureBox1.Load(V);
+            label1.Text = "";
             foreach (var potentialSensor in KinectSensor.KinectSensors)
             {
                 if (potentialSensor.Status == KinectStatus.Connected)
@@ -94,6 +95,24 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
             //    skeletonFrame.CopySkeletonDataTo(skeletonData);
 
             //}
+            foreach (Skeleton skeleton in this.skeletonData)
+            {
+                if (skeleton == null) continue;
+                if (skeleton.TrackingState == SkeletonTrackingState.Tracked )
+                {
+                    var a = 1;
+                    if (Math.Pow((skeleton.Joints[JointType.FootLeft].Position.X - skeleton.Joints[JointType.FootRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Y - skeleton.Joints[JointType.FootRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Z - skeleton.Joints[JointType.FootRight].Position.Z), 2)<0.03 )
+                    {
+                        label1.Text = "起势";
+                    }
+                    else
+                    {
+                        label1.Text = "其他";
+                    }
+                }
+            }
             bool received = false;
 
             using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
@@ -257,7 +276,7 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
                     using (SqlConnection conn = new SqlConnection(connsql))
                     {
                         conn.Open();//打开数据库
-
+                        
                         SqlCommand cmd = conn.CreateCommand();
                         //创建查询语句
                         //cmd.CommandText = "SELECT * FROM pos1";
@@ -295,7 +314,7 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
                         String All = insert + insert1 + insert2 + insert3 + insert4 + insert5 + insert6 + insert7 + insert8 + insert9 + 
                             insert10 + insert11 + insert12 + insert13 + insert14 + insert15 + insert16 + insert17 + insert18 + insert19;
                         cmd.CommandText = All;
-                        cmd.ExecuteNonQuery();
+                        //cmd.ExecuteNonQuery();
 
                     }
                 }
@@ -308,6 +327,24 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
 
         }
 
+
+        private void button_Click(object sender, EventArgs e)
+        {
+            foreach (Skeleton skeleton in this.skeletonData)
+            {
+                if (skeleton == null) continue;
+                if (skeleton.TrackingState == SkeletonTrackingState.Tracked )
+                {
+                    label2.Text = (Math.Pow((skeleton.Joints[JointType.FootLeft].Position.X - skeleton.Joints[JointType.FootRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Y - skeleton.Joints[JointType.FootRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Z - skeleton.Joints[JointType.FootRight].Position.Z), 2)).ToString();
+                }
+            }
+        }
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
         private void PictureBox1_Click(object sender, EventArgs e)
         {
 

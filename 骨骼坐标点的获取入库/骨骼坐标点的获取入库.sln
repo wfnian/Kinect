@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "骨骼坐标点的获取入库", "骨骼坐标点的获取入库\骨骼坐标点的获取入库.csproj", "{45357753-A6CA-4827-A64A-3D4EBD694370}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{12CDBA95-DFFD-4DB4-A283-1246D4AEA60D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{45357753-A6CA-4827-A64A-3D4EBD694370}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45357753-A6CA-4827-A64A-3D4EBD694370}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45357753-A6CA-4827-A64A-3D4EBD694370}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12CDBA95-DFFD-4DB4-A283-1246D4AEA60D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12CDBA95-DFFD-4DB4-A283-1246D4AEA60D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12CDBA95-DFFD-4DB4-A283-1246D4AEA60D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12CDBA95-DFFD-4DB4-A283-1246D4AEA60D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

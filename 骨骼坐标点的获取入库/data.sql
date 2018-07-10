@@ -38,5 +38,5 @@ use bone_pos
 --Delete from positions
 
 
-SELECT * FROM positions 
-where posid = 21
+SELECT avg(y) FROM positions 
+where posid = 23 and (joint='HandLeft'or joint = 'HandRight')
