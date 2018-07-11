@@ -32,27 +32,41 @@ def getData():
     y = list(map(subs,y))
   
     return res_x,y
+""" x 的形状类似于
+x = [[],
+     []
+     []
+     []]
+len(x[0]) = 12
+len(x) = 345
 
-getData()
+y 的形状类似于：表示分类
+y = [0,
+     1,
+     2,
+     3,
+     ...
+     ]
+len(y) = 345
+"""
 x,y = getData()
 
 class twentyclassification(nn.Module):
-    def __init__(self,in_dim,n_hidden_1,n_hidden_2,out_dim):
+    def __init__(self,in_dim,n_hidden_1,n_hidden,n_hidden_2,out_dim):
         super(twentyclassification,self).__init__()
         self.layer1=nn.Sequential(nn.Linear(in_dim,n_hidden_1),nn.ReLU(True))
-        self.layer2=nn.Sequential(nn.Linear(n_hidden_1,n_hidden_2),nn.ReLU(True))
+        self.layer2=nn.Sequential(nn.Linear(n_hidden_1,n_hidden),nn.ReLU(True))
+        self.layer=nn.Sequential(nn.Linear(n_hidden,n_hidden_2),nn.ReLU(True))
         self.layer3=nn.Sequential(nn.Linear(n_hidden_2,out_dim))
     
     def forward(self,x):
         x=self.layer1(x)
         x=self.layer2(x)
+        x=self.layer(x)
         x=self.layer3(x)
         
         return x
-model = twentyclassification(12,400,200,23)
-
-#if torch.cuda.is_available():
-#    model = model.cuda()
+model = twentyclassification(12,50,60,50,23)
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(),lr=1e-2)
@@ -73,7 +87,6 @@ for epoch in range(5000):
     if epoch %1 ==0:
         plt_loss.append(loss.item())
     #===================accurate ==================
-    
     vect = out.detach().numpy().tolist()
     acc = 0
     for i in range(len(vect)):
@@ -81,17 +94,18 @@ for epoch in range(5000):
             acc = acc+1
     acc = acc/len(vect)
     acc_.append(acc)       
-    #break
+    
     
 plt_loss = plt_loss[20:]
 #print(plt_loss)
 
 plt.subplot(211) 
 plt.plot(list(range(len(plt_loss))),plt_loss,'r')
-plt.title(u"loss")
+plt.title("loss")
 plt.subplot(212) 
 plt.plot(list(range(len(acc_))),acc_,'g')
-plt.title(u"acc")
+plt.title("acc")
+
 model.eval()
 
 
