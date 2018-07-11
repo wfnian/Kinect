@@ -69,12 +69,12 @@ class twentyclassification(nn.Module):
 model = twentyclassification(12,50,60,50,23)
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(),lr=1e-2)
+optimizer = optim.SGD(model.parameters(),lr=1e-3)
 
 plt_loss = []
 acc_ = []
 
-for epoch in range(5000):
+for epoch in range(10000):
     x_data = Variable(torch.tensor(x))
     target = Variable(torch.tensor(y))
     #=================== forward ==================
