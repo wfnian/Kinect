@@ -26,3 +26,8 @@ ___
 - 普通分类：获取相应关节点的坐标计算距离
 
 [基于kinect的人体动作识别系统](https://img-blog.csdn.net/20170930162524582?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYmFvbGlucQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+## 7/11日
+这怎么办
+![loss](https://github.com/wfnian/Kinect/blob/master/%E9%AA%A8%E9%AA%BC%E5%9D%90%E6%A0%87%E7%82%B9%E7%9A%84%E8%8E%B7%E5%8F%96%E5%85%A5%E5%BA%93/loss.png?raw=true)
+![loss2](https://github.com/wfnian/Kinect/blob/master/%E9%AA%A8%E9%AA%BC%E5%9D%90%E6%A0%87%E7%82%B9%E7%9A%84%E8%8E%B7%E5%8F%96%E5%85%A5%E5%BA%93/loss2.png?raw=true)
