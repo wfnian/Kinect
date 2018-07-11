@@ -32,6 +32,6 @@ ___
 ![loss](https://github.com/wfnian/Kinect/blob/master/%E9%AA%A8%E9%AA%BC%E5%9D%90%E6%A0%87%E7%82%B9%E7%9A%84%E8%8E%B7%E5%8F%96%E5%85%A5%E5%BA%93/loss.png?raw=true)
 ![loss2](https://github.com/wfnian/Kinect/blob/master/%E9%AA%A8%E9%AA%BC%E5%9D%90%E6%A0%87%E7%82%B9%E7%9A%84%E8%8E%B7%E5%8F%96%E5%85%A5%E5%BA%93/loss2.png?raw=true)
 #### 这还怎么玩。
-![acc_loss](https://github.com/wfnian/Kinect/blob/master/loss&acc.png?raw=true)
+![acc_loss](https://github.com/wfnian/Kinect/blob/master/loss_acc.png?raw=true)
 ### 又出现奇迹了。
 ![玄学](https://github.com/wfnian/Kinect/blob/master/geez.png?raw=true)
