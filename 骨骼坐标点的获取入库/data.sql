@@ -38,5 +38,18 @@ use bone_pos
 --Delete from positions
 
 
-SELECT avg(y) FROM positions 
-where posid = 23 and (joint='HandLeft'or joint = 'HandRight')
+--SELECT * FROM positions 
+--where posid = 23 
+
+--
+--hipcenter_handleft	hipright_handright	handright_kneeright	handleft_kneeleft	elbowleft_hipleft	elbowright_hipright	footleft_footright	handleft_footleft	handright_footright	handleft_handright	lable
+--drop Table distance
+--create TABLE distance(
+--	hipcenter_handleft1 float,hipright_handright2 float,handright_kneeright3 float,handleft_kneeleft4 float,
+--	elbowleft_hipleft5 float,elbowright_hipright6 float,footleft_footright7 float,handleft_footleft8 float,
+--	handright_footright9 float,handleft_handright10 float, handleft_head11 float,handright_head12 float,lable int
+--)
+--select count (*) from distance
+--group by lable
+
+select * from distance

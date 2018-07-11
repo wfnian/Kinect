@@ -24,6 +24,7 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
     {
         FileStream fs = new FileStream("f:\\2.txt", FileMode.Create);
         StreamWriter sw;
+        private int click_times = 0;
         private const string V = "F:\\kinect\\12.jpg";
         private String connsql = "server=.;database=bone_pos;integrated security=SSPI";
         private Image<Bgr, Byte> skeletonImage;
@@ -105,7 +106,7 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
                         Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Y - skeleton.Joints[JointType.FootRight].Position.Y), 2) +
                         Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Z - skeleton.Joints[JointType.FootRight].Position.Z), 2)<0.03 )
                     {
-                        label1.Text = "起势";
+                        label1.Text = "收势";
                     }
                     else
                     {
@@ -257,22 +258,14 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
 
         private void DatabaseOp_Click(object sender, EventArgs e)
         {
-
+            click_times++;
+            label3.Text = "次数："+(click_times % 15);
             foreach (Skeleton skeleton in this.skeletonData)
             {
                 if (skeleton == null) continue;
                 if (skeleton.TrackingState == SkeletonTrackingState.Tracked&&textBox1.Text!=null)
                 {
-                    Console.Write(" 头部 x " + skeleton.Joints[JointType.Head].Position.X);
-                    Console.Write(" y " + skeleton.Joints[JointType.Head].Position.Y);
-                    Console.WriteLine(" z " + skeleton.Joints[JointType.Head].Position.Z);
-                    Console.Write(" 左手 x " + skeleton.Joints[JointType.HandLeft].Position.X);
-                    Console.Write(" y " + skeleton.Joints[JointType.HandLeft].Position.Y);
-                    Console.WriteLine(" z " + skeleton.Joints[JointType.HandLeft].Position.Z);
-                    Console.Write(" 脊柱 x " + skeleton.Joints[JointType.Spine].Position.X);
-                    Console.Write(" y " + skeleton.Joints[JointType.Spine].Position.Y);
-                    Console.WriteLine(" z " + skeleton.Joints[JointType.Spine].Position.Z);
-                    Console.WriteLine();
+
                     using (SqlConnection conn = new SqlConnection(connsql))
                     {
                         conn.Open();//打开数据库
@@ -291,30 +284,97 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
                         //}
 
                         //reader.Close();//报bug，必须要关掉才可以执行。
-                        String insert = "insert into positions values("+ skeleton.Joints[JointType.Head].Position.X+ ","+ skeleton.Joints[JointType.Head].Position.Y + ","+ skeleton.Joints[JointType.Head].Position.Z+ "," + textBox1.Text + ",'Head')";
-                        String insert1 = " insert into positions values(" + skeleton.Joints[JointType.HandLeft].Position.X + "," + skeleton.Joints[JointType.HandLeft].Position.Y + "," + skeleton.Joints[JointType.HandLeft].Position.Z + ","+textBox1.Text+",'HandLeft')";
-                        String insert2 = " insert into positions values(" + skeleton.Joints[JointType.WristLeft].Position.X + "," + skeleton.Joints[JointType.WristLeft].Position.Y + "," + skeleton.Joints[JointType.WristLeft].Position.Z + "," + textBox1.Text + ",'WristLeft')";
-                        String insert3 = " insert into positions values(" + skeleton.Joints[JointType.ElbowLeft].Position.X + "," + skeleton.Joints[JointType.ElbowLeft].Position.Y + "," + skeleton.Joints[JointType.ElbowLeft].Position.Z + "," + textBox1.Text + ",'ElbowLeft')";
-                        String insert4 = " insert into positions values(" + skeleton.Joints[JointType.ShoulderLeft].Position.X + "," + skeleton.Joints[JointType.ShoulderLeft].Position.Y + "," + skeleton.Joints[JointType.ShoulderLeft].Position.Z + "," + textBox1.Text + ",'ShoulderLeft')";
-                        String insert5 = " insert into positions values(" + skeleton.Joints[JointType.ShoulderCenter].Position.X + "," + skeleton.Joints[JointType.ShoulderCenter].Position.Y + "," + skeleton.Joints[JointType.ShoulderCenter].Position.Z + "," + textBox1.Text + ",'ShoulderCenter')";
-                        String insert6 = " insert into positions values(" + skeleton.Joints[JointType.ShoulderRight].Position.X + "," + skeleton.Joints[JointType.ShoulderRight].Position.Y + "," + skeleton.Joints[JointType.ShoulderRight].Position.Z + "," + textBox1.Text + ",'ShoulderRight')";
-                        String insert7 = " insert into positions values(" + skeleton.Joints[JointType.ElbowRight].Position.X + "," + skeleton.Joints[JointType.ElbowRight].Position.Y + "," + skeleton.Joints[JointType.ElbowRight].Position.Z + "," + textBox1.Text + ",'ElbowRight')";
-                        String insert8 = " insert into positions values(" + skeleton.Joints[JointType.WristRight].Position.X + "," + skeleton.Joints[JointType.WristRight].Position.Y + "," + skeleton.Joints[JointType.WristRight].Position.Z + "," + textBox1.Text + ",'WristRight')";
-                        String insert9 = " insert into positions values(" + skeleton.Joints[JointType.HandRight].Position.X + "," + skeleton.Joints[JointType.HandRight].Position.Y + "," + skeleton.Joints[JointType.HandRight].Position.Z + "," + textBox1.Text + ",'HandRight')";
-                        String insert10 = " insert into positions values(" + skeleton.Joints[JointType.FootLeft].Position.X + "," + skeleton.Joints[JointType.FootLeft].Position.Y + "," + skeleton.Joints[JointType.FootLeft].Position.Z + "," + textBox1.Text + ",'FootLeft')";
-                        String insert11 = " insert into positions values(" + skeleton.Joints[JointType.AnkleLeft].Position.X + "," + skeleton.Joints[JointType.AnkleLeft].Position.Y + "," + skeleton.Joints[JointType.AnkleLeft].Position.Z + "," + textBox1.Text + ",'AnkleLeft')";
-                        String insert12 = " insert into positions values(" + skeleton.Joints[JointType.KneeLeft].Position.X + "," + skeleton.Joints[JointType.KneeLeft].Position.Y + "," + skeleton.Joints[JointType.KneeLeft].Position.Z + "," + textBox1.Text + ",'KneeLeft')";
-                        String insert13 = " insert into positions values(" + skeleton.Joints[JointType.HipLeft].Position.X + "," + skeleton.Joints[JointType.HipLeft].Position.Y + "," + skeleton.Joints[JointType.HipLeft].Position.Z + "," + textBox1.Text + ",'HipLeft')";
-                        String insert14 = " insert into positions values(" + skeleton.Joints[JointType.HipCenter].Position.X + "," + skeleton.Joints[JointType.HipCenter].Position.Y + "," + skeleton.Joints[JointType.HipCenter].Position.Z + "," + textBox1.Text + ",'HipCenter')";
-                        String insert15 = " insert into positions values(" + skeleton.Joints[JointType.Spine].Position.X + "," + skeleton.Joints[JointType.Spine].Position.Y + "," + skeleton.Joints[JointType.Spine].Position.Z + "," + textBox1.Text + ",'Spine')";
-                        String insert16 = " insert into positions values(" + skeleton.Joints[JointType.HipRight].Position.X + "," + skeleton.Joints[JointType.HipRight].Position.Y + "," + skeleton.Joints[JointType.HipRight].Position.Z + "," + textBox1.Text + ",'HipRight')";
-                        String insert17 = " insert into positions values(" + skeleton.Joints[JointType.KneeRight].Position.X + "," + skeleton.Joints[JointType.KneeRight].Position.Y + "," + skeleton.Joints[JointType.KneeRight].Position.Z + "," + textBox1.Text + ",'KneeRight')";
-                        String insert18 = " insert into positions values(" + skeleton.Joints[JointType.AnkleRight].Position.X + "," + skeleton.Joints[JointType.AnkleRight].Position.Y + "," + skeleton.Joints[JointType.AnkleRight].Position.Z + "," + textBox1.Text + ",'AnkleRight')";
-                        String insert19 = " insert into positions values(" + skeleton.Joints[JointType.FootRight].Position.X + "," + skeleton.Joints[JointType.FootRight].Position.Y + "," + skeleton.Joints[JointType.FootRight].Position.Z + "," + textBox1.Text + ",'FootRight')";
-                        String All = insert + insert1 + insert2 + insert3 + insert4 + insert5 + insert6 + insert7 + insert8 + insert9 + 
-                            insert10 + insert11 + insert12 + insert13 + insert14 + insert15 + insert16 + insert17 + insert18 + insert19;
+                        //String insert = "insert into positions values("+ skeleton.Joints[JointType.Head].Position.X+ ","+ skeleton.Joints[JointType.Head].Position.Y + ","+ skeleton.Joints[JointType.Head].Position.Z+ "," + textBox1.Text + ",'Head')";
+                        //String insert1 = " insert into positions values(" + skeleton.Joints[JointType.HandLeft].Position.X + "," + skeleton.Joints[JointType.HandLeft].Position.Y + "," + skeleton.Joints[JointType.HandLeft].Position.Z + ","+textBox1.Text+",'HandLeft')";
+                        //String insert2 = " insert into positions values(" + skeleton.Joints[JointType.WristLeft].Position.X + "," + skeleton.Joints[JointType.WristLeft].Position.Y + "," + skeleton.Joints[JointType.WristLeft].Position.Z + "," + textBox1.Text + ",'WristLeft')";
+                        //String insert3 = " insert into positions values(" + skeleton.Joints[JointType.ElbowLeft].Position.X + "," + skeleton.Joints[JointType.ElbowLeft].Position.Y + "," + skeleton.Joints[JointType.ElbowLeft].Position.Z + "," + textBox1.Text + ",'ElbowLeft')";
+                        //String insert4 = " insert into positions values(" + skeleton.Joints[JointType.ShoulderLeft].Position.X + "," + skeleton.Joints[JointType.ShoulderLeft].Position.Y + "," + skeleton.Joints[JointType.ShoulderLeft].Position.Z + "," + textBox1.Text + ",'ShoulderLeft')";
+                        //String insert5 = " insert into positions values(" + skeleton.Joints[JointType.ShoulderCenter].Position.X + "," + skeleton.Joints[JointType.ShoulderCenter].Position.Y + "," + skeleton.Joints[JointType.ShoulderCenter].Position.Z + "," + textBox1.Text + ",'ShoulderCenter')";
+                        //String insert6 = " insert into positions values(" + skeleton.Joints[JointType.ShoulderRight].Position.X + "," + skeleton.Joints[JointType.ShoulderRight].Position.Y + "," + skeleton.Joints[JointType.ShoulderRight].Position.Z + "," + textBox1.Text + ",'ShoulderRight')";
+                        //String insert7 = " insert into positions values(" + skeleton.Joints[JointType.ElbowRight].Position.X + "," + skeleton.Joints[JointType.ElbowRight].Position.Y + "," + skeleton.Joints[JointType.ElbowRight].Position.Z + "," + textBox1.Text + ",'ElbowRight')";
+                        //String insert8 = " insert into positions values(" + skeleton.Joints[JointType.WristRight].Position.X + "," + skeleton.Joints[JointType.WristRight].Position.Y + "," + skeleton.Joints[JointType.WristRight].Position.Z + "," + textBox1.Text + ",'WristRight')";
+                        //String insert9 = " insert into positions values(" + skeleton.Joints[JointType.HandRight].Position.X + "," + skeleton.Joints[JointType.HandRight].Position.Y + "," + skeleton.Joints[JointType.HandRight].Position.Z + "," + textBox1.Text + ",'HandRight')";
+                        //String insert10 = " insert into positions values(" + skeleton.Joints[JointType.FootLeft].Position.X + "," + skeleton.Joints[JointType.FootLeft].Position.Y + "," + skeleton.Joints[JointType.FootLeft].Position.Z + "," + textBox1.Text + ",'FootLeft')";
+                        //String insert11 = " insert into positions values(" + skeleton.Joints[JointType.AnkleLeft].Position.X + "," + skeleton.Joints[JointType.AnkleLeft].Position.Y + "," + skeleton.Joints[JointType.AnkleLeft].Position.Z + "," + textBox1.Text + ",'AnkleLeft')";
+                        //String insert12 = " insert into positions values(" + skeleton.Joints[JointType.KneeLeft].Position.X + "," + skeleton.Joints[JointType.KneeLeft].Position.Y + "," + skeleton.Joints[JointType.KneeLeft].Position.Z + "," + textBox1.Text + ",'KneeLeft')";
+                        //String insert13 = " insert into positions values(" + skeleton.Joints[JointType.HipLeft].Position.X + "," + skeleton.Joints[JointType.HipLeft].Position.Y + "," + skeleton.Joints[JointType.HipLeft].Position.Z + "," + textBox1.Text + ",'HipLeft')";
+                        //String insert14 = " insert into positions values(" + skeleton.Joints[JointType.HipCenter].Position.X + "," + skeleton.Joints[JointType.HipCenter].Position.Y + "," + skeleton.Joints[JointType.HipCenter].Position.Z + "," + textBox1.Text + ",'HipCenter')";
+                        //String insert15 = " insert into positions values(" + skeleton.Joints[JointType.Spine].Position.X + "," + skeleton.Joints[JointType.Spine].Position.Y + "," + skeleton.Joints[JointType.Spine].Position.Z + "," + textBox1.Text + ",'Spine')";
+                        //String insert16 = " insert into positions values(" + skeleton.Joints[JointType.HipRight].Position.X + "," + skeleton.Joints[JointType.HipRight].Position.Y + "," + skeleton.Joints[JointType.HipRight].Position.Z + "," + textBox1.Text + ",'HipRight')";
+                        //String insert17 = " insert into positions values(" + skeleton.Joints[JointType.KneeRight].Position.X + "," + skeleton.Joints[JointType.KneeRight].Position.Y + "," + skeleton.Joints[JointType.KneeRight].Position.Z + "," + textBox1.Text + ",'KneeRight')";
+                        //String insert18 = " insert into positions values(" + skeleton.Joints[JointType.AnkleRight].Position.X + "," + skeleton.Joints[JointType.AnkleRight].Position.Y + "," + skeleton.Joints[JointType.AnkleRight].Position.Z + "," + textBox1.Text + ",'AnkleRight')";
+                        //String insert19 = " insert into positions values(" + skeleton.Joints[JointType.FootRight].Position.X + "," + skeleton.Joints[JointType.FootRight].Position.Y + "," + skeleton.Joints[JointType.FootRight].Position.Z + "," + textBox1.Text + ",'FootRight')";
+                        //String All = insert + insert1 + insert2 + insert3 + insert4 + insert5 + insert6 + insert7 + insert8 + insert9 + 
+                        //    insert10 + insert11 + insert12 + insert13 + insert14 + insert15 + insert16 + insert17 + insert18 + insert19;
+
+                        // hipcenter_handleft	hipright_handright	handright_kneeright	handleft_kneeleft	elbowleft_hipleft	
+                        // elbowright_hipright	footleft_footright	handleft_footleft	handright_footright	handleft_handright	lable
+                        /*
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.X - skeleton.Joints[JointType.FootRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Y - skeleton.Joints[JointType.FootRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Z - skeleton.Joints[JointType.FootRight].Position.Z), 2);
+                        */
+                        double hipcenter_handleft1, hipright_handright2, handright_kneeright3, handleft_kneeleft4, elbowleft_hipleft5;
+                        double elbowright_hipright6, footleft_footright7, handleft_footleft8, handright_footright9, handleft_handright10;
+                        double handleft_head11, handright_head12;
+                        string lable = null;
+                        hipcenter_handleft1 =1000* Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HipCenter].Position.X - skeleton.Joints[JointType.HandLeft].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HipCenter].Position.Y - skeleton.Joints[JointType.HandLeft].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.HandLeft].Position.Z), 2));
+
+                        hipright_handright2 =1000* Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HipRight].Position.X - skeleton.Joints[JointType.HandRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HipRight].Position.Y - skeleton.Joints[JointType.HandRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HipRight].Position.Z - skeleton.Joints[JointType.HandRight].Position.Z), 2));
+
+                        handright_kneeright3 =1000* Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandRight].Position.X - skeleton.Joints[JointType.KneeRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandRight].Position.Y - skeleton.Joints[JointType.KneeRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandRight].Position.Z - skeleton.Joints[JointType.KneeRight].Position.Z), 2));
+
+                        handleft_kneeleft4 =1000* Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandLeft].Position.X - skeleton.Joints[JointType.KneeLeft].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Y - skeleton.Joints[JointType.KneeLeft].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.KneeLeft].Position.Z), 2));
+
+                        elbowleft_hipleft5 =1000* Math.Sqrt(Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.X - skeleton.Joints[JointType.HipLeft].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.Y - skeleton.Joints[JointType.HipLeft].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.Z - skeleton.Joints[JointType.HipLeft].Position.Z), 2));
+
+                        elbowright_hipright6 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.X - skeleton.Joints[JointType.HipRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.Y - skeleton.Joints[JointType.HipRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.Z - skeleton.Joints[JointType.HipRight].Position.Z), 2));
+
+                        footleft_footright7 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.FootLeft].Position.X - skeleton.Joints[JointType.FootRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Y - skeleton.Joints[JointType.FootRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Z - skeleton.Joints[JointType.FootRight].Position.Z), 2));
+
+                        handleft_footleft8 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.FootLeft].Position.X - skeleton.Joints[JointType.HandLeft].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Y - skeleton.Joints[JointType.HandLeft].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Z - skeleton.Joints[JointType.HandLeft].Position.Z), 2));
+
+                        handright_footright9 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandRight].Position.X - skeleton.Joints[JointType.FootRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandRight].Position.Y - skeleton.Joints[JointType.FootRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandRight].Position.Z - skeleton.Joints[JointType.FootRight].Position.Z), 2));
+
+                        handleft_handright10 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandLeft].Position.X - skeleton.Joints[JointType.HandRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Y - skeleton.Joints[JointType.HandRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.HandRight].Position.Z), 2));
+
+                        handleft_head11 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandLeft].Position.X - skeleton.Joints[JointType.Head].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Y - skeleton.Joints[JointType.Head].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.Head].Position.Z), 2));
+
+                        handright_head12 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.Head].Position.X - skeleton.Joints[JointType.HandRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.Head].Position.Y - skeleton.Joints[JointType.HandRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.Head].Position.Z - skeleton.Joints[JointType.HandRight].Position.Z), 2));
+
+                        lable = textBox1.Text;
+                        
+                        string All = "insert into distance values("+hipcenter_handleft1+","+ hipright_handright2 + "," + handright_kneeright3 
+                            + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7 
+                            + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11 
+                            + "," + handright_head12 + "," + lable+")";
+                        Console.WriteLine(All);
                         cmd.CommandText = All;
-                        //cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
 
                     }
                 }
