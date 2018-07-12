@@ -18,3 +18,5 @@ F:\kinect\骨骼坐标点的获取入库\骨骼坐标点的获取入库\obj\Rele
 F:\kinect\骨骼坐标点的获取入库\骨骼坐标点的获取入库\obj\Release\骨骼坐标点的获取入库.exe
 F:\kinect\骨骼坐标点的获取入库\骨骼坐标点的获取入库\obj\Release\骨骼坐标点的获取入库.pdb
 F:\kinect\骨骼坐标点的获取入库\骨骼坐标点的获取入库\obj\Release\骨骼坐标点的获取入库.csprojAssemblyReference.cache
+F:\kinect\骨骼坐标点的获取入库\骨骼坐标点的获取入库\bin\Release\CSkin.dll
+F:\kinect\骨骼坐标点的获取入库\骨骼坐标点的获取入库\bin\Release\CSkin.xml

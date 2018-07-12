@@ -8,3 +8,6 @@ F:\kinect\骨骼坐标点的获取入库\test\obj\Release\test.csproj.GenerateRe
 F:\kinect\骨骼坐标点的获取入库\test\obj\Release\test.csproj.CoreCompileInputs.cache
 F:\kinect\骨骼坐标点的获取入库\test\obj\Release\test.exe
 F:\kinect\骨骼坐标点的获取入库\test\obj\Release\test.pdb
+F:\kinect\骨骼坐标点的获取入库\test\bin\Release\CSkin.dll
+F:\kinect\骨骼坐标点的获取入库\test\bin\Release\CSkin.xml
+F:\kinect\骨骼坐标点的获取入库\test\obj\Release\test.csproj.CopyComplete
