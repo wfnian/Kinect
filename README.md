@@ -31,7 +31,7 @@ ___
 loss1 | loss2(抛弃前20个)
 ---- | ---
 ![loss](https://github.com/wfnian/Kinect/blob/master/%E9%AA%A8%E9%AA%BC%E5%9D%90%E6%A0%87%E7%82%B9%E7%9A%84%E8%8E%B7%E5%8F%96%E5%85%A5%E5%BA%93/loss.png?raw=true)|![loss2](https://github.com/wfnian/Kinect/blob/master/%E9%AA%A8%E9%AA%BC%E5%9D%90%E6%A0%87%E7%82%B9%E7%9A%84%E8%8E%B7%E5%8F%96%E5%85%A5%E5%BA%93/loss2.png?raw=true)
-#### 这还怎么玩。
+### 分类有问题啊。
 ![acc_loss](https://github.com/wfnian/Kinect/blob/master/loss_acc.png?raw=true)
 ### 又出现奇迹了。
 ![玄学](https://github.com/wfnian/Kinect/blob/master/geez.png?raw=true)
@@ -43,6 +43,8 @@ learning rate | number of iterations
 ## 接下来几日日程安排
 __时间__ | __任务__
 ---- | ---
+__7/10__ 周二|__数据采集，考虑分类__
+__7/11__ 周三|__分类__
 __7/12__ 周四|__数据采集，增加抗干扰性__
 __7/13__ 周五|__python 与c#交互，python负责识别，c#界面与数据的读取__
 __7/14__ |__界面__
