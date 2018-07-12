@@ -52,4 +52,4 @@ use bone_pos
 --select count (*) from distance
 --group by lable
 
-select * from distance
+select * from posture

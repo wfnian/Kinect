@@ -66,15 +66,16 @@ class twentyclassification(nn.Module):
         x=self.layer3(x)
         
         return x
+    
 model = twentyclassification(12,50,60,50,23)
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(),lr=1e-3)
+optimizer = optim.SGD(model.parameters(),lr=1e-4)
 
 plt_loss = []
 acc_ = []
 
-for epoch in range(10000):
+for epoch in range(2500):
     x_data = Variable(torch.tensor(x))
     target = Variable(torch.tensor(y))
     #=================== forward ==================
@@ -84,8 +85,8 @@ for epoch in range(10000):
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
-    if epoch %1 ==0:
-        plt_loss.append(loss.item())
+    #if epoch %1 ==0:
+    plt_loss.append(loss.item())
     #===================accurate ==================
     vect = out.detach().numpy().tolist()
     acc = 0
@@ -106,8 +107,9 @@ plt.subplot(212)
 plt.plot(list(range(len(acc_))),acc_,'g')
 plt.title("acc")
 
+plt.show()
 model.eval()
-
+torch.save(model,'e://23_classification_model.pth')
 
 
 #predict = model(Variable(torch.tensor([[0,3,3,4,5,6,7,8]]).float()))

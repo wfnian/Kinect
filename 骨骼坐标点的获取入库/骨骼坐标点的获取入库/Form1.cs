@@ -14,7 +14,7 @@ using System.Data.SqlClient;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.Util;
-
+using System.Diagnostics;
 
 
 namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
@@ -372,16 +372,43 @@ namespace 骨骼坐标点的获取入库//不好意思命名我用了汉字。
                             + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7 
                             + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11 
                             + "," + handright_head12 + "," + lable+")";
-                        Console.WriteLine(All);
-                        cmd.CommandText = All;
-                        cmd.ExecuteNonQuery();
-
+                        
+                        string cons = "F:\\kinect\\application.py "+hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
+                            + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7
+                            + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11
+                            + "," + handright_head12;
+                        //Console.WriteLine(cons);
+                        //cmd.CommandText = All;
+                        //cmd.ExecuteNonQuery();
+                        sss(cons);
                     }
                 }
             }
 
         }
+        private void sss(string cmdd)
+        {
+            string strInput = cmdd;
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.CreateNoWindow = true;
+            p.Start();
+            p.StandardInput.WriteLine(strInput + "&exit");
+            p.StandardInput.AutoFlush = true;
+            string strOuput = p.StandardOutput.ReadToEnd();
+            p.WaitForExit();
+            p.Close();
 
+            //Console.WriteLine();
+            string[] pos = { "起势", "左右野马分鬃", "白鹤亮翅", "左右搂膝拗步", "手挥琵琶", "左右倒卷肱", "左揽雀尾", "右拦雀尾", "单鞭", "云手", "高探马", "右蹬脚", "双峰贯耳", "转身左蹬脚", "左下式独立", "左下式独立", "左右穿梭", "海底针", "闪通臂", "转身搬拦捶", "如封似闭", "十字手", "收势" };
+            int post = int.Parse(strOuput.Split('\n')[strOuput.Split('\n').Length - 2]);
+            label3.Text = pos[post-1];
+
+        }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
