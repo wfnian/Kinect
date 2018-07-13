@@ -11,6 +11,8 @@ using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using CCWin;
+using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
 
 namespace test
 {
@@ -31,7 +33,10 @@ namespace test
 
         private void skinButton1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(DateTime.Now.Second);
+            ScriptEngine pyEngine = Python.CreateEngine();//创建Python解释器对象
+            dynamic py = pyEngine.ExecuteFile(@"F:\\kinect\\骨骼坐标点的获取入库\\骨骼坐标点的获取入库\\bin\\Debug\\test.py");//读取脚本文件
+            string dd = py.main("调用");//调用脚本文件中对应的函数
+            skinLabel1.Text += dd ;
         }
     }
 }

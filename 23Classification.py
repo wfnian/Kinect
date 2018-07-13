@@ -17,7 +17,7 @@ def subs(x):
     return x-1
 
 def getData():
-    f = open("F:\\kinect\\11.txt",'r')
+    f = open("F:\\kinect\\source_data.txt",'r')
     data = f.readlines()
     y = []
     x = []
@@ -67,15 +67,15 @@ class twentyclassification(nn.Module):
         
         return x
     
-model = twentyclassification(12,50,60,50,23)
+model = twentyclassification(12,40,50,40,23)
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SGD(model.parameters(),lr=1e-4)
+optimizer = optim.SGD(model.parameters(),lr=1e-3)
 
 plt_loss = []
 acc_ = []
 
-for epoch in range(2500):
+for epoch in range(1500):
     x_data = Variable(torch.tensor(x))
     target = Variable(torch.tensor(y))
     #=================== forward ==================
@@ -100,17 +100,26 @@ for epoch in range(2500):
 plt_loss = plt_loss[20:]
 #print(plt_loss)
 
-plt.subplot(211) 
+fig  = plt.figure(0)
+plt.figure(figsize=(3.64, 2.35))
 plt.plot(list(range(len(plt_loss))),plt_loss,'r')
-plt.title("loss")
-plt.subplot(212) 
-plt.plot(list(range(len(acc_))),acc_,'g')
-plt.title("acc")
+plt.title("network loss")
+plt.savefig('f:\\loss.png')
+plt.close(0)
 
-plt.show()
+fig = plt.figure(2)
+plt.figure(figsize=(3.64, 2.35))
+plt.plot(list(range(len(acc_))),acc_,'g')
+plt.title("network acc")
+plt.savefig('f:\\acc.png')
+plt.close(2)
+
+#plt.show()
 model.eval()
 torch.save(model,'e://23_classification_model.pth')
 
+"""
+"""
 
 #predict = model(Variable(torch.tensor([[0,3,3,4,5,6,7,8]]).float()))
 #print(predict)

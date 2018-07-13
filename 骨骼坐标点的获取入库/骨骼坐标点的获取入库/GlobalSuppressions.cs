@@ -10,4 +10,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("样式", "IDE1006:命名样式", Justification = "<挂起>", Scope = "member", Target = "~M:骨骼坐标点的获取入库.Form1.toolStripStatusLabel1_Click(System.Object,System.EventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("样式", "IDE1006:命名样式", Justification = "<挂起>", Scope = "member", Target = "~M:骨骼坐标点的获取入库.Form1.tableLayoutPanel1_Paint(System.Object,System.Windows.Forms.PaintEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("样式", "IDE1006:命名样式", Justification = "<挂起>", Scope = "member", Target = "~M:骨骼坐标点的获取入库.Form1.skinButton1_Click(System.Object,System.EventArgs)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("样式", "IDE1006:命名样式", Justification = "<挂起>", Scope = "member", Target = "~M:骨骼坐标点的获取入库.Form1.skinButton2_Click(System.Object,System.EventArgs)")]
 
