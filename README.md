@@ -1,4 +1,4 @@
-# Kinect
+# Kinect应用-结合神经网络的姿势识别
 _Kinect for detecting postures of chinese kongfu..._
 
 ![url](https://qr.api.cli.im/qr?data=https%253A%252F%252Fgithub.com%252Fwfnian%252FKinect&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=http%3A&size=136&kid=cliim&key=6fc6080d5e7a26cb74bf361066319a3c)
