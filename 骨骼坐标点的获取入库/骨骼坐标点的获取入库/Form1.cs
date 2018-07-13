@@ -122,6 +122,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
                 imageBox1.Image = skeletonImage;
             }
             Thread thread = new Thread(ShowIn12Label);
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;//设置该属性 为false
             if (DateTime.Now.Second % 5 == 0) // 每隔五秒更新一次
             {
                 //ShowIn12Label();  // 未启用多线程
@@ -310,107 +311,114 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
         private void skinButton2_Click(object sender, EventArgs e)
         {
             // 主要是数据采集以及数据传入 ,核心
-            
-                //click_times++;
-                //label3.Text = "次数："+(click_times % 15);
-                //Console.WriteLine("hello");
 
-                foreach (Skeleton skeleton in this.skeletonData)
+            //click_times++;
+            //label3.Text = "次数："+(click_times % 15);
+            //Console.WriteLine("hello");
+            Graphics g = this.CreateGraphics();
+            //出现一个画笔
+            Pen pen = new Pen(Brushes.Red);
+            //因为创建矩形需要point对象与size对象
+            Point p = new Point(555, 40);
+            Size s = new Size(60, 60);
+            Rectangle r = new Rectangle(p, s);
+            g.DrawRectangle(pen, r);
+            foreach (Skeleton skeleton in this.skeletonData)
+            {
+                if (skeleton == null) continue;
+                if (skeleton.TrackingState == SkeletonTrackingState.Tracked)
                 {
-                    if (skeleton == null) continue;
-                    if (skeleton.TrackingState == SkeletonTrackingState.Tracked)
+
+                    using (SqlConnection conn = new SqlConnection(connsql))
                     {
+                        conn.Open();//打开数据库
 
-                        using (SqlConnection conn = new SqlConnection(connsql))
-                        {
-                            conn.Open();//打开数据库
+                        SqlCommand cmd = conn.CreateCommand();
+                        //创建查询语句
+                        //cmd.CommandText = "SELECT * FROM pos1";
+                        ////从数据库中读取数据流存入reader中
+                        //SqlDataReader reader = cmd.ExecuteReader();
+                        //Console.WriteLine(conn.State);
+                        //while (reader.Read())
+                        //{
+                        //    string name = reader.GetString(reader.GetOrdinal("x1"));
+                        //    //int age = reader.GetInt32(reader.GetOrdinal("age"));
+                        //    Console.WriteLine(name);
+                        //}
+                        //reader.Close();//报bug，必须要关掉才可以执行。
+                        //String insert = "insert into positions values("+ skeleton.Joints[JointType.Head].Position.X+ ","+ skeleton.Joints[JointType.Head].Position.Y + ","+ skeleton.Joints[JointType.Head].Position.Z+ "," + textBox1.Text + ",'Head')";
 
-                            SqlCommand cmd = conn.CreateCommand();
-                            //创建查询语句
-                            //cmd.CommandText = "SELECT * FROM pos1";
-                            ////从数据库中读取数据流存入reader中
-                            //SqlDataReader reader = cmd.ExecuteReader();
-                            //Console.WriteLine(conn.State);
-                            //while (reader.Read())
-                            //{
-                            //    string name = reader.GetString(reader.GetOrdinal("x1"));
-                            //    //int age = reader.GetInt32(reader.GetOrdinal("age"));
-                            //    Console.WriteLine(name);
-                            //}
-                            //reader.Close();//报bug，必须要关掉才可以执行。
-                            //String insert = "insert into positions values("+ skeleton.Joints[JointType.Head].Position.X+ ","+ skeleton.Joints[JointType.Head].Position.Y + ","+ skeleton.Joints[JointType.Head].Position.Z+ "," + textBox1.Text + ",'Head')";
-                            
-                            string lable = null;
-                            hipcenter_handleft1 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HipCenter].Position.X - skeleton.Joints[JointType.HandLeft].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HipCenter].Position.Y - skeleton.Joints[JointType.HandLeft].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.HandLeft].Position.Z), 2));
+                        string lable = null;
+                        hipcenter_handleft1 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HipCenter].Position.X - skeleton.Joints[JointType.HandLeft].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HipCenter].Position.Y - skeleton.Joints[JointType.HandLeft].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.HandLeft].Position.Z), 2));
 
-                            hipright_handright2 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HipRight].Position.X - skeleton.Joints[JointType.HandRight].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HipRight].Position.Y - skeleton.Joints[JointType.HandRight].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HipRight].Position.Z - skeleton.Joints[JointType.HandRight].Position.Z), 2));
+                        hipright_handright2 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HipRight].Position.X - skeleton.Joints[JointType.HandRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HipRight].Position.Y - skeleton.Joints[JointType.HandRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HipRight].Position.Z - skeleton.Joints[JointType.HandRight].Position.Z), 2));
 
-                            handright_kneeright3 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandRight].Position.X - skeleton.Joints[JointType.KneeRight].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HandRight].Position.Y - skeleton.Joints[JointType.KneeRight].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HandRight].Position.Z - skeleton.Joints[JointType.KneeRight].Position.Z), 2));
+                        handright_kneeright3 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandRight].Position.X - skeleton.Joints[JointType.KneeRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandRight].Position.Y - skeleton.Joints[JointType.KneeRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandRight].Position.Z - skeleton.Joints[JointType.KneeRight].Position.Z), 2));
 
-                            handleft_kneeleft4 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandLeft].Position.X - skeleton.Joints[JointType.KneeLeft].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Y - skeleton.Joints[JointType.KneeLeft].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.KneeLeft].Position.Z), 2));
+                        handleft_kneeleft4 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandLeft].Position.X - skeleton.Joints[JointType.KneeLeft].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Y - skeleton.Joints[JointType.KneeLeft].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.KneeLeft].Position.Z), 2));
 
-                            elbowleft_hipleft5 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.X - skeleton.Joints[JointType.HipLeft].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.Y - skeleton.Joints[JointType.HipLeft].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.Z - skeleton.Joints[JointType.HipLeft].Position.Z), 2));
+                        elbowleft_hipleft5 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.X - skeleton.Joints[JointType.HipLeft].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.Y - skeleton.Joints[JointType.HipLeft].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.Z - skeleton.Joints[JointType.HipLeft].Position.Z), 2));
 
-                            elbowright_hipright6 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.X - skeleton.Joints[JointType.HipRight].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.Y - skeleton.Joints[JointType.HipRight].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.Z - skeleton.Joints[JointType.HipRight].Position.Z), 2));
+                        elbowright_hipright6 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.X - skeleton.Joints[JointType.HipRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.Y - skeleton.Joints[JointType.HipRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.Z - skeleton.Joints[JointType.HipRight].Position.Z), 2));
 
-                            footleft_footright7 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.FootLeft].Position.X - skeleton.Joints[JointType.FootRight].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Y - skeleton.Joints[JointType.FootRight].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Z - skeleton.Joints[JointType.FootRight].Position.Z), 2));
+                        footleft_footright7 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.FootLeft].Position.X - skeleton.Joints[JointType.FootRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Y - skeleton.Joints[JointType.FootRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Z - skeleton.Joints[JointType.FootRight].Position.Z), 2));
 
-                            handleft_footleft8 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.FootLeft].Position.X - skeleton.Joints[JointType.HandLeft].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Y - skeleton.Joints[JointType.HandLeft].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Z - skeleton.Joints[JointType.HandLeft].Position.Z), 2));
+                        handleft_footleft8 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.FootLeft].Position.X - skeleton.Joints[JointType.HandLeft].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Y - skeleton.Joints[JointType.HandLeft].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.FootLeft].Position.Z - skeleton.Joints[JointType.HandLeft].Position.Z), 2));
 
-                            handright_footright9 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandRight].Position.X - skeleton.Joints[JointType.FootRight].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HandRight].Position.Y - skeleton.Joints[JointType.FootRight].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HandRight].Position.Z - skeleton.Joints[JointType.FootRight].Position.Z), 2));
+                        handright_footright9 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandRight].Position.X - skeleton.Joints[JointType.FootRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandRight].Position.Y - skeleton.Joints[JointType.FootRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandRight].Position.Z - skeleton.Joints[JointType.FootRight].Position.Z), 2));
 
-                            handleft_handright10 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandLeft].Position.X - skeleton.Joints[JointType.HandRight].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Y - skeleton.Joints[JointType.HandRight].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.HandRight].Position.Z), 2));
+                        handleft_handright10 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandLeft].Position.X - skeleton.Joints[JointType.HandRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Y - skeleton.Joints[JointType.HandRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.HandRight].Position.Z), 2));
 
-                            handleft_head11 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandLeft].Position.X - skeleton.Joints[JointType.Head].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Y - skeleton.Joints[JointType.Head].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.Head].Position.Z), 2));
+                        handleft_head11 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.HandLeft].Position.X - skeleton.Joints[JointType.Head].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Y - skeleton.Joints[JointType.Head].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.HandLeft].Position.Z - skeleton.Joints[JointType.Head].Position.Z), 2));
 
-                            handright_head12 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.Head].Position.X - skeleton.Joints[JointType.HandRight].Position.X), 2) +
-                            Math.Pow((skeleton.Joints[JointType.Head].Position.Y - skeleton.Joints[JointType.HandRight].Position.Y), 2) +
-                            Math.Pow((skeleton.Joints[JointType.Head].Position.Z - skeleton.Joints[JointType.HandRight].Position.Z), 2));
+                        handright_head12 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.Head].Position.X - skeleton.Joints[JointType.HandRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.Head].Position.Y - skeleton.Joints[JointType.HandRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.Head].Position.Z - skeleton.Joints[JointType.HandRight].Position.Z), 2));
 
-                            lable = textBox1.Text;
+                        lable = textBox1.Text;
 
-                            string All = "insert into distance values(" + hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
-                                + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7
-                                + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11
-                                + "," + handright_head12 + "," + lable + ")";
+                        string All = "insert into distance values(" + hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
+                            + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7
+                            + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11
+                            + "," + handright_head12 + "," + lable + ")";
 
-                            string cons = "F:\\kinect\\application.py " + hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
-                                + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7
-                                + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11
-                                + "," + handright_head12;
-                            
-                            //Console.WriteLine(cons);
-                            //cmd.CommandText = All;
-                            //cmd.ExecuteNonQuery();
+                        string cons = "F:\\kinect\\application.py " + hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
+                            + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7
+                            + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11
+                            + "," + handright_head12;
+
+                        //Console.WriteLine(cons);
+                        //cmd.CommandText = All;
+                        //cmd.ExecuteNonQuery();
 
 
 
-                            Predicate(cons);// 动作预测。
-                        }
+                        Predicate(cons);// 动作预测。
                     }
-                
+                }
+
             }
         }
 
