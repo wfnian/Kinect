@@ -23,7 +23,7 @@ ___
 
 
 - [x] 
-1.太极姿势集合。  见pic.jpg ,最好会做。![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon) ![Status](https://img.shields.io/badge/finished-%E9%99%88%E8%BF%9C%E5%86%9B%2C%E4%BD%95%E5%BD%A6%E4%BD%B6-blue.svg)![node](https://img.shields.io/badge/%E7%8E%8B%E6%96%B9%E5%B9%B4-adding-green.svg)
+1.太极姿势集合。  见pic.jpg ,最好会做。![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon) ![Status](https://img.shields.io/badge/finished-%E9%99%88%E8%BF%9C%E5%86%9B%2C%E4%BD%95%E5%BD%A6%E4%BD%B6-blue.svg) ![node](https://img.shields.io/badge/%E7%8E%8B%E6%96%B9%E5%B9%B4-adding-green.svg)
 
 - [ ] 
 2.如何分类？ ①.svm支持向量机。 ②.普通分类？可以算两个节点之间的距离（二范数、曼哈顿距离）③.深度学习方法![Pytorch](https://img.shields.io/badge/Framework-PyTorch-brightgreen.svg)  ![node](https://img.shields.io/badge/%E7%8E%8B%E6%96%B9%E5%B9%B4-adding-green.svg)
