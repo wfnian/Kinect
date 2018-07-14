@@ -1,7 +1,7 @@
 # Kinect应用-结合神经网络的姿势识别
 _Kinect for detecting postures of chinese kongfu..._
 
-![url](https://qr.api.cli.im/qr?data=https%253A%252F%252Fgithub.com%252Fwfnian%252FKinect&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=http%3A&size=136&kid=cliim&key=6fc6080d5e7a26cb74bf361066319a3c)
+
 <!-- TOC -->
 
 - [Kinect应用-结合神经网络的姿势识别](#kinect应用-结合神经网络的姿势识别)
@@ -23,16 +23,16 @@ ___
 
 
 - [x] 
-1.太极姿势集合。  见pic.jpg ,最好会做。![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon) ![Status](https://img.shields.io/badge/finished-%E9%99%88%E8%BF%9C%E5%86%9B%2C%E4%BD%95%E5%BD%A6%E4%BD%B6-blue.svg)
+1.太极姿势集合。  见pic.jpg ,最好会做。![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon) ![Status](https://img.shields.io/badge/finished-%E9%99%88%E8%BF%9C%E5%86%9B%2C%E4%BD%95%E5%BD%A6%E4%BD%B6-blue.svg)![node](https://img.shields.io/badge/%E7%8E%8B%E6%96%B9%E5%B9%B4-adding-green.svg)
 
 - [ ] 
-2.如何分类？ ①.svm支持向量机。 ②.普通分类？可以算两个节点之间的距离（二范数、曼哈顿距离）③.深度学习方法![Pytorch](https://img.shields.io/badge/Framework-PyTorch-brightgreen.svg) 
+2.如何分类？ ①.svm支持向量机。 ②.普通分类？可以算两个节点之间的距离（二范数、曼哈顿距离）③.深度学习方法![Pytorch](https://img.shields.io/badge/Framework-PyTorch-brightgreen.svg)  ![node](https://img.shields.io/badge/%E7%8E%8B%E6%96%B9%E5%B9%B4-adding-green.svg)
 
 
 - [x] 
 3.数据库入库。![Build Status](https://camo.githubusercontent.com/7ff1a64ca6e9f85bcdfc81a2e11bff01b9ad3d33/68747470733a2f2f7472617669732d63692e6f72672f70696b65736c65792f6769746875626261646765732e737667) ![node](https://img.shields.io/badge/%E7%8E%8B%E6%96%B9%E5%B9%B4-adding-green.svg) ![finfshed](https://img.shields.io/badge/finished-%E9%99%88%E8%BF%9C%E5%86%9B-blue.svg)
 - [x] 
-4.20个点标记。  ![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon)
+4.20个点标记。  ![Build Status](https://ci.pytorch.org/jenkins/job/pytorch-master/badge/icon) ![node](https://img.shields.io/badge/%E7%8E%8B%E6%96%B9%E5%B9%B4-adding-green.svg)
 - [x] 
 5.rgbd深度摄像机点集获取。  ![Build Status](https://camo.githubusercontent.com/7ff1a64ca6e9f85bcdfc81a2e11bff01b9ad3d33/68747470733a2f2f7472617669732d63692e6f72672f70696b65736c65792f6769746875626261646765732e737667) ![node](https://img.shields.io/badge/%E7%8E%8B%E6%96%B9%E5%B9%B4-adding-green.svg) 
 
@@ -73,3 +73,5 @@ ___
 
 - 多线程调用很危险![attation](https://img.shields.io/badge/Attention-Serious-red.svg) 
 - 注意文件的绝对路径
+---
+![url](https://qr.api.cli.im/qr?data=https%253A%252F%252Fgithub.com%252Fwfnian%252FKinect&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=http%3A&size=136&kid=cliim&key=6fc6080d5e7a26cb74bf361066319a3c)
