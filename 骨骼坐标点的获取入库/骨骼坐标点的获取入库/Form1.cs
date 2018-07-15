@@ -24,18 +24,19 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
     public partial class Form1 : CCSkinMain
     {
         private int click_times = 0;
-        private const string pos_Pic = "F:\\kinect\\Kinect\\pic.jpg";   // 注意路径
+        private const string pos_Pic = "F:\\kinect\\Kinect\\pic\\pic.jpg";   // 注意路径
         private String connsql = "server=.;database=bone_pos;integrated security=SSPI";
         private Image<Bgr, Byte> skeletonImage;
+
         int depthWidth, depthHeight;
-        private double hipcenter_handleft1 = 0, hipright_handright2 = 0, handright_kneeright3 = 0, handleft_kneeleft4, elbowleft_hipleft5 = 0;
-        private double elbowright_hipright6 = 0, footleft_footright7, handleft_footleft8 = 0, handright_footright9 = 0, handleft_handright10 = 0;
-        private double handleft_head11 = 0, handright_head12 = 0;
+        private double hipcenter_handleft1 = 0, hipright_handright2 = 0, handright_kneeright3 = 0, handleft_kneeleft4 = 0, elbowleft_hipleft5 = 0;
+        private double elbowright_hipright6 = 0, footleft_footright7 = 0, handleft_footleft8 = 0, handright_footright9 = 0, handleft_handright10 = 0;
+        private double handleft_head11 = 0, handright_head12 = 0, elbowright_kneeleft13 = 0, elbowleft_kneeright14 = 0;
 
         private string[] pos = { "起势", "左右野马分鬃", "白鹤亮翅", "左右搂膝拗步", "手挥琵琶",
             "左右倒卷肱", "左揽雀尾", "右拦雀尾", "单鞭", "云手", "高探马", "右蹬脚", "双峰贯耳",
             "转身左蹬脚", "左下式独立", "左下式独立", "左右穿梭", "海底针", "闪通臂", "转身搬拦捶",
-            "如封似闭", "十字手", "收势" };
+            "如封似闭", "十字手", "预备势" };
 
         private Skeleton[] skeletonData;// 按理说是识别六人，size = 6
         private MCvFont font = new MCvFont(Emgu.CV.CvEnum.FONT.CV_FONT_HERSHEY_COMPLEX, 0.3, 0.3);
@@ -52,8 +53,8 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
         private void Form1_Load(object sender, EventArgs e)
         {
             pictureBox1.Load(pos_Pic);
-            
-            
+            this.Location = (Point)new Size(100, 1);
+
             foreach (var potentialSensor in KinectSensor.KinectSensors)
             {
                 if (potentialSensor.Status == KinectStatus.Connected)
@@ -94,6 +95,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
             else
             {
                 MessageBox.Show("设备未就绪！", "未连接");
+                skinButton2.Enabled = false;
             }
 
         }
@@ -122,7 +124,8 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
                 imageBox1.Image = skeletonImage;
             }
             Thread thread = new Thread(ShowIn12Label);
-            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;//设置该属性 为false
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+            //设置该属性 为false
             if (DateTime.Now.Second % 5 == 0) // 每隔五秒更新一次
             {
                 //ShowIn12Label();  // 未启用多线程
@@ -312,17 +315,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
         {
             // 主要是数据采集以及数据传入 ,核心
 
-            //click_times++;
-            //label3.Text = "次数："+(click_times % 15);
-            //Console.WriteLine("hello");
-            Graphics g = this.CreateGraphics();
-            //出现一个画笔
-            Pen pen = new Pen(Brushes.Red);
-            //因为创建矩形需要point对象与size对象
-            Point p = new Point(555, 40);
-            Size s = new Size(60, 60);
-            Rectangle r = new Rectangle(p, s);
-            g.DrawRectangle(pen, r);
+
             foreach (Skeleton skeleton in this.skeletonData)
             {
                 if (skeleton == null) continue;
@@ -397,17 +390,25 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
                         Math.Pow((skeleton.Joints[JointType.Head].Position.Y - skeleton.Joints[JointType.HandRight].Position.Y), 2) +
                         Math.Pow((skeleton.Joints[JointType.Head].Position.Z - skeleton.Joints[JointType.HandRight].Position.Z), 2));
 
+                        elbowright_kneeleft13 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.X - skeleton.Joints[JointType.KneeLeft].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.Y - skeleton.Joints[JointType.KneeLeft].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowRight].Position.Z - skeleton.Joints[JointType.KneeLeft].Position.Z), 2));
+
+                        elbowleft_kneeright14 = 1000 * Math.Sqrt(Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.X - skeleton.Joints[JointType.KneeRight].Position.X), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.Y - skeleton.Joints[JointType.KneeRight].Position.Y), 2) +
+                        Math.Pow((skeleton.Joints[JointType.ElbowLeft].Position.Z - skeleton.Joints[JointType.KneeRight].Position.Z), 2));
+
                         lable = textBox1.Text;
 
-                        string All = "insert into distance values(" + hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
-                            + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7
-                            + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11
-                            + "," + handright_head12 + "," + lable + ")";
+                        //string All = "insert into distance values(" + hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
+                        //    + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7
+                        //    + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11
+                        //    + "," + handright_head12 + "," + lable + ")";
 
-                        string cons = "F:\\kinect\\application.py " + hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
+                        string cons = "F:\\kinect\\Kinect\\neural_network\\application.py " + hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
                             + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7
                             + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11
-                            + "," + handright_head12;
+                            + "," + handright_head12 + "," + elbowright_kneeleft13 + "," + elbowleft_kneeright14;
 
                         //Console.WriteLine(cons);
                         //cmd.CommandText = All;
@@ -415,7 +416,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
 
 
 
-                        Predicate(cons);// 动作预测。
+                        Predicate(cons);// 动作预测.
                     }
                 }
 
@@ -436,20 +437,22 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
 
         private void skinButton1_Click(object sender, EventArgs e)
         {
+            //  使用多线程，防止按钮卡顿。
             click_times++;
             Thread thread1 = new Thread(TrainNetwork1);
             Thread thread2 = new Thread(TrainNetwork2);
-            if (click_times % 2 == 0)//这个会造成读写冲突，因此复制一份
+            if (click_times % 2 == 0)//这个会造成读写冲突，因此复制一份,交叉执行。
             {
-                thread2.Abort();
+
                 thread1.Start();
-                
+                thread2.Abort();
+               
             }
             else
             {
-                thread1.Abort();
                 thread2.Start();
-                
+                thread1.Abort();
+               
             }
 
 
@@ -457,8 +460,8 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
 
         private void TrainNetwork2()
         {
-            string strInput = "F:\\kinect\\23Classification.py";
-            // 此程序写D:盘，所以应当读取F:盘
+            string strInput = "F:\\kinect\\Kinect\\neural_network\\backup\\23Classification.py";
+
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.UseShellExecute = false;
@@ -472,16 +475,16 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
             string strOuput = p.StandardOutput.ReadToEnd();
             p.WaitForExit();
             p.Close();
-            //skinPictureBox1.Image. = "";
 
-            skinPictureBox1.Load(@"f:\\loss.png");  // 注意路径
-            skinPictureBox2.Load(@"f:\\acc.png");  // 注意路径
+            skinPictureBox1.Load(@"F:\\kinect\\Kinect\\neural_network\\backup\\loss.png");  // 注意路径
+            skinPictureBox2.Load(@"F:\\kinect\\Kinect\\neural_network\\backup\\acc.png");  // 注意路径
         }
 
         private void TrainNetwork1()
         {
-            string strInput = "F:\\kinect\\Kinect\\23Classification.py";  // 注意路径
-                                                                          // 此程序写F:盘，应当读取D:盘
+
+            string strInput = "F:\\kinect\\Kinect\\neural_network\\23Classification.py";  // 注意路径
+
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.UseShellExecute = false;
@@ -496,13 +499,14 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
             p.WaitForExit();
             p.Close();
 
-            skinPictureBox1.Load(@"d:\\loss.png");  // 注意路径
-            skinPictureBox2.Load(@"d:\\acc.png");  // 注意路径
+            skinPictureBox1.Load(@"F:\\kinect\\Kinect\\neural_network\\train_loss_acc_pic\\loss.png");  // 注意路径
+            skinPictureBox2.Load(@"F:\\kinect\\Kinect\\neural_network\\train_loss_acc_pic\\acc.png");  // 注意路径
         }
 
         private void Predicate(string cmdd)
         {
             string strInput = cmdd;
+            int post = 0;
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.UseShellExecute = false;
@@ -518,7 +522,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
             p.Close();
             
             
-            int post = int.Parse(strOuput.Split('\n')[strOuput.Split('\n').Length - 2]); //duipython执行结果进行提取.
+            post = int.Parse(strOuput.Split('\n')[strOuput.Split('\n').Length - 2]); //duipython执行结果进行提取.
             label3.Text = pos[post-1];
 
         }

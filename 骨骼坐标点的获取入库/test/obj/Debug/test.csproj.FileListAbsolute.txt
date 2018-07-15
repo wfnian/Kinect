@@ -1,9 +1,0 @@
-F:\kinect\骨骼坐标点的获取入库\test\bin\Debug\test.exe.config
-F:\kinect\骨骼坐标点的获取入库\test\bin\Debug\test.exe
-F:\kinect\骨骼坐标点的获取入库\test\bin\Debug\test.pdb
-F:\kinect\骨骼坐标点的获取入库\test\obj\Debug\test.Form1.resources
-F:\kinect\骨骼坐标点的获取入库\test\obj\Debug\test.Properties.Resources.resources
-F:\kinect\骨骼坐标点的获取入库\test\obj\Debug\test.csproj.GenerateResource.cache
-F:\kinect\骨骼坐标点的获取入库\test\obj\Debug\test.csproj.CoreCompileInputs.cache
-F:\kinect\骨骼坐标点的获取入库\test\obj\Debug\test.exe
-F:\kinect\骨骼坐标点的获取入库\test\obj\Debug\test.pdb

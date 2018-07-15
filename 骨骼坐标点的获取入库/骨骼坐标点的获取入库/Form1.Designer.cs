@@ -37,10 +37,12 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.skinButton1 = new CCWin.SkinControl.SkinButton();
             this.skinPictureBox1 = new CCWin.SkinControl.SkinPictureBox();
             this.skinPictureBox2 = new CCWin.SkinControl.SkinPictureBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.skinButton2 = new CCWin.SkinControl.SkinButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -54,8 +56,6 @@
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.skinButton2 = new CCWin.SkinControl.SkinButton();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -133,6 +133,11 @@
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(131, 17);
             this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
             // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(820, 16);
+            // 
             // skinButton1
             // 
             this.skinButton1.BackColor = System.Drawing.Color.Transparent;
@@ -183,6 +188,25 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(288, 169);
             this.flowLayoutPanel1.TabIndex = 16;
+            // 
+            // skinButton2
+            // 
+            this.skinButton2.BackColor = System.Drawing.Color.Transparent;
+            this.skinButton2.BaseColor = System.Drawing.Color.DimGray;
+            this.skinButton2.BorderColor = System.Drawing.Color.Black;
+            this.skinButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.skinButton2.DownBack = null;
+            this.skinButton2.DownBaseColor = System.Drawing.Color.Red;
+            this.skinButton2.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.skinButton2.Location = new System.Drawing.Point(146, 3);
+            this.skinButton2.MouseBack = null;
+            this.skinButton2.Name = "skinButton2";
+            this.skinButton2.NormlBack = null;
+            this.skinButton2.Size = new System.Drawing.Size(138, 79);
+            this.skinButton2.TabIndex = 14;
+            this.skinButton2.Text = "点击识别";
+            this.skinButton2.UseVisualStyleBackColor = false;
+            this.skinButton2.Click += new System.EventHandler(this.skinButton2_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -347,30 +371,6 @@
             this.label32.TabIndex = 11;
             this.label32.Text = "diatance";
             // 
-            // skinButton2
-            // 
-            this.skinButton2.BackColor = System.Drawing.Color.Transparent;
-            this.skinButton2.BaseColor = System.Drawing.Color.DimGray;
-            this.skinButton2.BorderColor = System.Drawing.Color.Black;
-            this.skinButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.skinButton2.DownBack = null;
-            this.skinButton2.DownBaseColor = System.Drawing.Color.Red;
-            this.skinButton2.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.skinButton2.Location = new System.Drawing.Point(146, 3);
-            this.skinButton2.MouseBack = null;
-            this.skinButton2.Name = "skinButton2";
-            this.skinButton2.NormlBack = null;
-            this.skinButton2.Size = new System.Drawing.Size(138, 79);
-            this.skinButton2.TabIndex = 14;
-            this.skinButton2.Text = "点击识别";
-            this.skinButton2.UseVisualStyleBackColor = false;
-            this.skinButton2.Click += new System.EventHandler(this.skinButton2_Click);
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(820, 16);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -378,6 +378,7 @@
             this.BackColor = System.Drawing.Color.LightGray;
             this.BackgroundImage = global::骨骼坐标点的获取入库.Properties.Resources.pexels_photo_4343373;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BorderColor = System.Drawing.Color.MediumBlue;
             this.ClientSize = new System.Drawing.Size(1125, 727);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.textBox1);
@@ -388,6 +389,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.imageBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.InnerBorderColor = System.Drawing.Color.Chartreuse;
             this.Name = "Form1";
             this.Text = "Kinect应用 - 结合神经网络的姿势识别";
             this.Load += new System.EventHandler(this.Form1_Load);

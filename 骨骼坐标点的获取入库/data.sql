@@ -52,4 +52,13 @@ use bone_pos
 --select count (*) from distance
 --group by lable
 
-select * from posture
+--select * from posture
+
+--2018/7/14
+--create TABLE distance2(
+--	hipcenter_handleft1 float,hipright_handright2 float,handright_kneeright3 float,handleft_kneeleft4 float,
+--	elbowleft_hipleft5 float,elbowright_hipright6 float,footleft_footright7 float,handleft_footleft8 float,
+--	handright_footright9 float,handleft_handright10 float, handleft_head11 float,handright_head12 float,
+--	elbowright_kneeleft13 float, elbowleft_kneeright14 float,lable int
+--)
+select * from distance2;
