@@ -43,18 +43,18 @@ ___
 [基于kinect的人体动作识别系统](https://img-blog.csdn.net/20170930162524582?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYmFvbGlucQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
 ## 1.3. 基于神经网络的分类
+### 1.3.1. 分类有问题啊。
 loss1 | loss2(抛弃前20个)
 ---- | ---
-![loss](https://github.com/wfnian/Kinect/blob/master/%E9%AA%A8%E9%AA%BC%E5%9D%90%E6%A0%87%E7%82%B9%E7%9A%84%E8%8E%B7%E5%8F%96%E5%85%A5%E5%BA%93/loss.png?raw=true)|![loss2](https://github.com/wfnian/Kinect/blob/master/%E9%AA%A8%E9%AA%BC%E5%9D%90%E6%A0%87%E7%82%B9%E7%9A%84%E8%8E%B7%E5%8F%96%E5%85%A5%E5%BA%93/loss2.png?raw=true)
-### 1.3.1. 分类有问题啊。
-![acc_loss](https://github.com/wfnian/Kinect/blob/master/loss_acc.png?raw=true)
+![loss](https://github.com/wfnian/Kinect/blob/master/pic/1.png)|![loss2](https://github.com/wfnian/Kinect/blob/master/pic/2.png)
 ### 1.3.2. 又出现奇迹了。
-![玄学](https://github.com/wfnian/Kinect/blob/master/geez.png?raw=true)
+![玄学](https://github.com/wfnian/Kinect/blob/master/pic/geez.png)
 ### 1.3.3. 调整了学习率以及神经单元的层数
-learning rate | number of iterations
+loss | acc
 ---- | ---
-![hh](https://github.com/wfnian/Kinect/blob/master/7-11-18-26.png?raw=true)|![hh](https://github.com/wfnian/Kinect/blob/master/7-11-18-30.png?raw=true)
-
+![](https://github.com/wfnian/Kinect/blob/master/neural_network/train_loss_acc_pic/loss.png)|![](https://github.com/wfnian/Kinect/blob/master/neural_network/train_loss_acc_pic/acc.png)
+### 1.3.4. 网络结构
+![](https://github.com/wfnian/Kinect/blob/master/pic/network_model.png)
 ## 1.4. 接下来几日日程安排
 __时间__ | __任务__
 ---- | ---
