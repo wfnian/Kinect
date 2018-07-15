@@ -1,6 +1,6 @@
 # Kinect应用-结合神经网络的姿势识别
 _Kinect for detecting postures of chinese kongfu..._
-## README/wiki索引  
+## 1.1. README/wiki索引  
 
 <!-- TOC -->
 
@@ -17,7 +17,7 @@ _Kinect for detecting postures of chinese kongfu..._
     - [1.7. 注意事项](#15-注意事项)
 
 <!-- /TOC -->
-## 项目目录结构
+## 1.2. 项目目录结构
 - Kinect
     - neural_network  (神经网络分类))
         - backup
@@ -41,7 +41,7 @@ _Kinect for detecting postures of chinese kongfu..._
     - data.sql  (SQL SERVER 数据库)
 
 
-## 1.1. 项目进度 ![Build Status](https://img.shields.io/badge/%E8%BF%9B%E5%BA%A6-Stagnation-lightgrey.svg)
+## 1.3. 项目进度 ![Build Status](https://img.shields.io/badge/%E8%BF%9B%E5%BA%A6-Stagnation-lightgrey.svg)
 
 ___ 
 
@@ -60,7 +60,7 @@ ___
 - [x] 
 5.rgbd深度摄像机点集获取。  ![Build Status](https://camo.githubusercontent.com/7ff1a64ca6e9f85bcdfc81a2e11bff01b9ad3d33/68747470733a2f2f7472617669732d63692e6f72672f70696b65736c65792f6769746875626261646765732e737667) ![node](https://img.shields.io/badge/%E7%8E%8B%E6%96%B9%E5%B9%B4-adding-green.svg) 
 
-## 1.2. Tips 
+## 1.4. Tips 
 ___
 - 普通分类：获取相应关节点的坐标计算距离
 - 交互式？静态？
@@ -73,16 +73,16 @@ ___
 - [C#程序调用cmd执行命令](http://www.cnblogs.com/babycool/p/3570648.html)  
 - [C#多线程编程](https://www.cnblogs.com/luxiaoxun/p/3280146.html) 
 - [C#连接SQLServer数据库基本实现](https://www.cnblogs.com/wuqianling/p/5950667.html)
-## 1.3. 基于神经网络的分类
-### 1.3.1. 调整学习率，层数，隐层单元数。
+## 1.5. 基于神经网络的分类
+### 1.5.1. 调整学习率，层数，隐层单元数。
 ![玄学](https://github.com/wfnian/Kinect/blob/master/pic/geez.png?raw=true)
-### 1.3.2. 调整了学习率以及神经单元的层数
+### 1.5.2. 调整了学习率以及神经单元的层数
 | loss                                                                                                  | acc                                                                                                  |
 | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | ![](https://github.com/wfnian/Kinect/blob/master/neural_network/train_loss_acc_pic/loss.png?raw=true) | ![](https://github.com/wfnian/Kinect/blob/master/neural_network/train_loss_acc_pic/acc.png?raw=true) |
-### 1.3.3. 网络结构
+### 1.5.3. 网络结构
 ![](https://github.com/wfnian/Kinect/blob/master/pic/network_model.png?raw=true)
-## 1.4. 接下来几日日程安排
+## 1.6. 接下来几日日程安排
 | __时间__      | __任务__                                                |
 | ------------- | ------------------------------------------------------- |
 | __7/10__ 周二 | __数据采集，考虑如何分类__                              |
@@ -95,7 +95,7 @@ ___
 | __7/17-7/19__ | __完善__                                                |
 | __7/20__      | __答辩__                                                |
 ___
-## 1.5. 注意事项
+## 1.7. 注意事项
 
 - 多线程调用很危险 ![attation](https://img.shields.io/badge/Attention-Serious-red.svg) 
 - 注意文件的绝对路径
