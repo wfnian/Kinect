@@ -5,16 +5,16 @@ _Kinect for detecting postures of chinese kongfu..._
 <!-- TOC -->
 
 - [Kinect应用-结合神经网络的姿势识别](#kinect应用-结合神经网络的姿势识别)
-    - [1.1. README/wiki索引](#readmewiki索引)
-    - [1.2. 项目目录结构](#项目目录结构)
-    - [1.3. 项目进度 ![Build Status](https://img.shields.io/badge/进度-Stagnation-lightgrey.svg)](#11-项目进度-build-statushttpsimgshieldsiobadge-stagnation-lightgreysvg)
-    - [1.4. Tips](#12-tips)
-    - [1.5. 基于神经网络的分类](#13-基于神经网络的分类)
-        - [1.5.1. 调整学习率，层数，隐层单元数。](#131-调整学习率层数隐层单元数)
-        - [1.5.2. 调整了学习率以及神经单元的层数](#132-调整了学习率以及神经单元的层数)
-        - [1.5.3. 网络结构](#133-网络结构)
-    - [1.6. 接下来几日日程安排](#14-接下来几日日程安排)
-    - [1.7. 注意事项](#15-注意事项)
+    - [1.1. README/wiki索引](#11-readmewiki索引)
+    - [1.2. 项目目录结构](#12-项目目录结构)
+    - [1.3. 项目进度 ![Build Status](https://img.shields.io/badge/进度-Stagnation-lightgrey.svg)](#13-项目进度-build-statushttpsimgshieldsiobadge-stagnation-lightgreysvg)
+    - [1.4. Tips](#14-tips)
+    - [1.5. 基于神经网络的分类](#15-基于神经网络的分类)
+        - [1.5.1. 调整学习率，层数，隐层单元数。](#151-调整学习率层数隐层单元数)
+        - [1.5.2. 调整了学习率以及神经单元的层数](#152-调整了学习率以及神经单元的层数)
+        - [1.5.3. 网络结构](#153-网络结构)
+    - [1.6. 接下来几日日程安排](#16-接下来几日日程安排)
+    - [1.7. 注意事项](#17-注意事项)
 
 <!-- /TOC -->
 ## 1.2. 项目目录结构
