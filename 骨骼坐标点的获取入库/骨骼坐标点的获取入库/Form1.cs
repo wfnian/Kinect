@@ -29,8 +29,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
         private const string pos_Pic = "F:\\kinect\\Kinect\\pic\\pic.jpg";   // 注意路径
         private String connsql = "server=.;database=bone_pos;integrated security=SSPI";
         private Image<Bgr, Byte> skeletonImage;
-        private Thread threadShowIn12Label;
-
+        
         int depthWidth, depthHeight;
         private double hipcenter_handleft1 = 0, hipright_handright2 = 0, handright_kneeright3 = 0, handleft_kneeleft4 = 0, elbowleft_hipleft5 = 0;
         private double elbowright_hipright6 = 0, footleft_footright7 = 0, handleft_footleft8 = 0, handright_footright9 = 0, handleft_handright10 = 0;
@@ -91,8 +90,8 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
                     ;
                 }
 
-                this.toolStripStatusLabel1.Text = " " + DateTime.Now.ToString("yyyy-MM-dd hh:mm");
-                this.toolStripStatusLabel2.Text = "\tKinect设备已连接，工作正常";
+                this.toolStripStatusLabel1.Text = " " + DateTime.Now.ToString("yyyy-MM-dd hh:mm ");
+                this.toolStripStatusLabel2.Text = "\tKinect 设备已连接，工作正常.";
 
             }
             else
@@ -312,6 +311,8 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
             img.Draw(str.ToString(), ref font, p_2, new Bgr(0, 255, 0));
         }
 
+        
+
         private void skinButton2_Click(object sender, EventArgs e)
         {
             // 主要是数据采集以及数据传入 ,核心
@@ -429,18 +430,19 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
             click_times++;
             Thread thread1 = new Thread(TrainNetwork1);
             Thread thread2 = new Thread(TrainNetwork2);
+            Thread thread3 = new Thread(ProcessBar);
             if (click_times % 2 == 0)//这个会造成读写冲突，因此复制一份,交叉执行。
             {
 
                 thread1.Start();
                 thread2.Abort();
-               
+                thread3.Start();
             }
             else
             {
                 thread2.Start();
                 thread1.Abort();
-               
+                thread3.Start();
             }
 
 
@@ -515,6 +517,24 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
 
         }
 
+        private void ProcessBar()
+        {
+            while (true)
+            {
+                if (toolStripProgressBar1.Value < 100)
+                {
+                    toolStripProgressBar1.Value += 4;
+                    Thread.Sleep(500);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            Thread.Sleep(2000);
+            toolStripProgressBar1.Value = 0;
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -538,6 +558,10 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
         private void PictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+        private void toolStripProgressBar1_Click(object sender, EventArgs e)
+        {
+            
         }
 
     }
