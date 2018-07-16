@@ -184,9 +184,9 @@
             this.flowLayoutPanel1.Controls.Add(this.skinButton1);
             this.flowLayoutPanel1.Controls.Add(this.skinButton2);
             this.flowLayoutPanel1.Controls.Add(this.label3);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(825, 529);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(825, 532);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(288, 169);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(288, 166);
             this.flowLayoutPanel1.TabIndex = 16;
             // 
             // skinButton2
@@ -202,7 +202,7 @@
             this.skinButton2.MouseBack = null;
             this.skinButton2.Name = "skinButton2";
             this.skinButton2.NormlBack = null;
-            this.skinButton2.Size = new System.Drawing.Size(138, 79);
+            this.skinButton2.Size = new System.Drawing.Size(137, 79);
             this.skinButton2.TabIndex = 14;
             this.skinButton2.Text = "点击识别";
             this.skinButton2.UseVisualStyleBackColor = false;
@@ -378,7 +378,7 @@
             this.BackColor = System.Drawing.Color.LightGray;
             this.BackgroundImage = global::骨骼坐标点的获取入库.Properties.Resources.pexels_photo_4343373;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BorderColor = System.Drawing.Color.MediumBlue;
+            this.BorderColor = System.Drawing.Color.OrangeRed;
             this.ClientSize = new System.Drawing.Size(1125, 727);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.textBox1);
@@ -389,7 +389,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.imageBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.InnerBorderColor = System.Drawing.Color.Chartreuse;
+            this.InnerBorderColor = System.Drawing.Color.Coral;
             this.Name = "Form1";
             this.Text = "Kinect应用 - 结合神经网络的姿势识别";
             this.Load += new System.EventHandler(this.Form1_Load);
