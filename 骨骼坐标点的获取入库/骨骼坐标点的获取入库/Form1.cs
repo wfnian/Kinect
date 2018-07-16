@@ -299,7 +299,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
             }
 
             img.Draw(new LineSegment2D(p_1, p_2), new Bgr(255, 255, 0), lineWidth);
-            img.Draw(new CircleF(p_1, 5), new Bgr(0, 0, 255), -1);
+            img.Draw(new CircleF(p_1,5), new Bgr(0, 0, 255), -1);
 
             StringBuilder str = new StringBuilder();
             str.AppendFormat("({0},{1},{2})", p1.X.ToString("0.0"), p1.Y.ToString("0.0"), p1.Z.ToString("0.0"));
@@ -388,17 +388,17 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
 
                         lable = textBox1.Text;
 
-                        //string All = "insert into distance values(" + hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
-                        //    + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7
-                        //    + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11
-                        //    + "," + handright_head12 + "," + lable + ")";
+                        string All = "insert into distance3 values(" + hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
+                            + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7
+                            + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11
+                            + "," + handright_head12 + "," + elbowright_kneeleft13 + "," + elbowleft_kneeright14 +","+ lable + ")";
 
                         string cons = "F:\\kinect\\Kinect\\neural_network\\application.py " + hipcenter_handleft1 + "," + hipright_handright2 + "," + handright_kneeright3
                             + "," + handleft_kneeleft4 + "," + elbowleft_hipleft5 + "," + elbowright_hipright6 + "," + footleft_footright7
                             + "," + handleft_footleft8 + "," + handright_footright9 + "," + handleft_handright10 + "," + handleft_head11
                             + "," + handright_head12 + "," + elbowright_kneeleft13 + "," + elbowleft_kneeright14;
 
-                        Console.WriteLine(cons);
+                        //Console.WriteLine(cons);
                         //cmd.CommandText = All;
                         //cmd.ExecuteNonQuery();
 
