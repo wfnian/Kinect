@@ -379,7 +379,7 @@
             this.BackColor = System.Drawing.Color.LightGray;
             this.BackgroundImage = global::骨骼坐标点的获取入库.Properties.Resources.pexels_photo_4343373;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BorderColor = System.Drawing.Color.OrangeRed;
+            this.BorderColor = System.Drawing.Color.Blue;
             this.CaptionFont = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ClientSize = new System.Drawing.Size(1125, 727);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -391,7 +391,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.imageBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.InnerBorderColor = System.Drawing.Color.Coral;
+            this.InnerBorderColor = System.Drawing.Color.RoyalBlue;
             this.Name = "Form1";
             this.Text = "Kinect应用 - 结合神经网络的姿势识别";
             this.Load += new System.EventHandler(this.Form1_Load);

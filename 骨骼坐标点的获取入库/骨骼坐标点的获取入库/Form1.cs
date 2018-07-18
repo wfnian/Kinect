@@ -47,6 +47,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
         DepthImageFormat depthImageFormat;
 
         private KinectSensor sensor;
+
         public Form1()
         {
             InitializeComponent();
@@ -91,7 +92,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
                 }
 
                 this.toolStripStatusLabel1.Text = " " + DateTime.Now.ToString("yyyy-MM-dd hh:mm ");
-                this.toolStripStatusLabel2.Text = "\tKinect 设备已连接，工作正常.";
+                this.toolStripStatusLabel2.Text = "\tKinect设备已连接，工作正常.";
 
             }
             else
@@ -310,9 +311,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
             str.AppendFormat("({0},{1},{2})", p2.X.ToString("0.0"), p2.Y.ToString("0.0"), p2.Z.ToString("0.0"));
             img.Draw(str.ToString(), ref font, p_2, new Bgr(0, 255, 0));
         }
-
-        
-
+                
         private void skinButton2_Click(object sender, EventArgs e)
         {
             // 主要是数据采集以及数据传入 ,核心
@@ -431,6 +430,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
             Thread thread1 = new Thread(TrainNetwork1);
             Thread thread2 = new Thread(TrainNetwork2);
             Thread thread3 = new Thread(ProcessBar);
+            Control.CheckForIllegalCrossThreadCalls = false;
             if (click_times % 2 == 0)//这个会造成读写冲突，因此复制一份,交叉执行。
             {
 
@@ -512,7 +512,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
             p.Close();
             
             
-            post = int.Parse(strOuput.Split('\n')[strOuput.Split('\n').Length - 2]); //duipython执行结果进行提取.
+            post = int.Parse(strOuput.Split('\n')[strOuput.Split('\n').Length - 2]); //对python执行结果进行提取.
             label3.Text = pos[post-1];
 
         }
@@ -531,7 +531,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
                     break;
                 }
             }
-            Thread.Sleep(2000);
+            Thread.Sleep(4000);
             toolStripProgressBar1.Value = 0;
         }
 
@@ -559,6 +559,7 @@ namespace 骨骼坐标点的获取入库     // 不好意思命名我用了汉�
         {
 
         }
+
         private void toolStripProgressBar1_Click(object sender, EventArgs e)
         {
             
