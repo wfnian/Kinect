@@ -22,13 +22,9 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ProductName>kinect</ProductName>
-    <PublisherName>王方年</PublisherName>
-    <SuiteName>神经网络</SuiteName>
     <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
-    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -55,7 +51,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationIcon>bitbug_favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
@@ -70,11 +66,12 @@
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
-  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
-  <PropertyGroup />
   <ItemGroup>
     <Reference Include="CSkin">
       <HintPath>..\..\CSkin 16.1.14.2\CSkin 4.0\CSkin.dll</HintPath>
@@ -155,14 +152,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app.ico" />
     <Content Include="bitbug_favicon.ico" />
     <None Include="Resources\pexels-photo-4343373.jpeg" />
     <None Include="Resources\pexels-photo-4343372.jpeg" />
+    <None Include="Resources\2.jpg" />
+    <None Include="Resources\88.jpg" />
+    <None Include="Resources\44.jpg" />
+    <None Include="Resources\7.jpg" />
+    <None Include="Resources\77.jpg" />
     <None Include="Resources\acc.png" />
     <None Include="Resources\loss.png" />
     <None Include="Resources\pexels-photo-4343371.jpeg" />
     <None Include="Resources\pexels-photo-434337.jpeg" />
+    <None Include="Resources\100.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
