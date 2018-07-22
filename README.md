@@ -125,6 +125,7 @@ for epoch in range(3000):
 最后将模型保存起来便是。*torch.save(model,’model.pth’)*,方便下次进行预测时直接调用模型预测。加载的时候 *model = torch.load('model.pth')* 就可以直接利用已经训练好的模型，进行正向传播预测结果。
 预测结果是和 *y*同等 *shape*的数组，其中最大值所在的下表索引便是我们要结果值。
 最后训练的网络模型 *loss*和 *acc*如下：
+
 | loss                                                                                                  | acc                                                                                                  |
 | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | ![](https://github.com/wfnian/Kinect/blob/master/neural_network/train_loss_acc_pic/loss.png?raw=true) | ![](https://github.com/wfnian/Kinect/blob/master/neural_network/train_loss_acc_pic/acc.png?raw=true) |
