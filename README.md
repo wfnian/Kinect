@@ -197,7 +197,3 @@ fc.BeginInvoke(null, null);
 - 《机器学习》 周志华 著   
 - 《统计学习方法》 李航 著   
 - 吴恩达深度学习 COURSERA   
-
-> ---
-
-**END:君不见高堂明镜悲白发，朝如青丝暮成雪。**[为什么？](https://github.com/wfnian/learn_git/blob/master/utils.md)
