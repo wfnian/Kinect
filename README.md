@@ -1,4 +1,4 @@
-<b>(补充:另外一个不适用硬件设备使用OpenPose的姿态识别项目地址[posture_recognition](https://github.com/wfnian/posture_recognition))</b>
+<b>(补充:另外一个不使用硬件设备使用OpenPose的姿态识别项目地址[posture_recognition](https://github.com/wfnian/posture_recognition))</b>
 
 # Kinect应用-结合神经网络的姿势识别
 
